@@ -6,7 +6,7 @@
 public class Position
 {
 	/**The following lines represent the column and line respectively*/
-	private char col;
+	private int col;
 	private int row;
 	
 	/**
@@ -14,16 +14,16 @@ public class Position
 	 */
 	public Position()
 	{
-		setCol('a');
+		setCol(1);
 		setRow(1);
 	}
 	
 	/**
 	 * Creates the position c,r
-	 * @param c the column character to be set
+	 * @param c the column number to be set
 	 * @param r the row number to be set
 	 */
-	public Position(char c, int r)
+	public Position(int c, int r)
 	{
 		setCol(c); 
 		setRow(r); 
@@ -32,7 +32,7 @@ public class Position
 	/**
 	 * @return the column letter 
 	 */
-	public char getCol()
+	public int getCol()
 	{
 		return col;
 	}
@@ -40,7 +40,7 @@ public class Position
 	/**
 	 * @param col the column to set
 	 */
-	public void setCol(char col)
+	public void setCol(int col)
 	{
 		this.col = col;
 	}
