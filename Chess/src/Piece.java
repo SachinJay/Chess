@@ -9,4 +9,11 @@ public abstract class Piece
 	/**Which side the piece is on*/
 	private Side side; 
 	
+	public Piece(Side side)
+	{
+		this.side = side;
+	}
+	
+	public abstract Boolean canMove(Board board, Tile start, Tile end);
+	
 }
