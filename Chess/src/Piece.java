@@ -14,6 +14,6 @@ public abstract class Piece
 		this.side = side;
 	}
 	
-	public abstract Boolean canMove(Board board, Tile start, Tile end);
+	public abstract Boolean canMove(Board board, Square start, Square end);
 	
 }
