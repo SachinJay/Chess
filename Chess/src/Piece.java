@@ -1,7 +1,7 @@
 /**
- * 
- * @author Sachin Devasahayam
  * Abstract class that any chess piece should implement
+ * @author Sachin Devasahayam
+ * 
  *
  */
 public abstract class Piece

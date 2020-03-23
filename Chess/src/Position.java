@@ -106,4 +106,9 @@ public class Position
 				
 		}
 	}
+
+	public static Position stringToPos(String pos)
+	{
+		return null;		
+	}
 }
