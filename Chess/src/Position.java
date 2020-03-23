@@ -60,4 +60,43 @@ public class Position
 	{
 		this.row = row;
 	}
+	
+	@Override
+	public String toString()
+	{
+		String pos = posToStr(this.getCol()) + ","+ this.getRow();
+		
+		return pos;
+	}
+	
+	/**
+	 * 
+	 * @param pos column position to be converted into a letter
+	 * @return the letter corresponding to the entered position
+	 */
+	public String posToStr(int pos)
+	{
+		switch(pos)
+		{
+		case 1: 
+			return "a";
+		case 2: 
+			return "b";
+		case 3: 
+			return "c";
+		case 4: 
+			return "d";
+		case 5: 
+			return "e";
+		case 6: 
+			return "f";
+		case 7: 
+			return "g";
+		case 8: 
+			return "h";
+		default:
+			return "a";
+				
+		}
+	}
 }
