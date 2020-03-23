@@ -1,3 +1,5 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * 
  * @author Sachin Devasahayam
@@ -25,6 +27,8 @@ public class Position
 	 */
 	public Position(int c, int r)
 	{
+		assert (c <=8 && c >= 1);
+		assert (r <=8 && r >= 1);
 		setCol(c); 
 		setRow(r); 
 	}
