@@ -1,8 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 
 class ChessTests
@@ -35,7 +33,15 @@ class ChessTests
 		assertEquals("g7",pos7.toString());
 		assertEquals("h8",pos8.toString());
 		
-		//Invalid attempts at constucting a position
+		//Invalid attempts at constructing a position should throw IllegalArgumentException
+		assertThrows(IllegalArgumentException.class, () -> new Position(0,8));// row too low
+		assertThrows(IllegalArgumentException.class, () -> new Position(9,8));// row too high
+		assertThrows(IllegalArgumentException.class, () -> new Position(1,0));//col too low
+		assertThrows(IllegalArgumentException.class, () -> new Position(1,9));//col too high
+		assertThrows(IllegalArgumentException.class, () -> new Position(0,0));//both too low
+		assertThrows(IllegalArgumentException.class, () -> new Position(9,9));//both too high
+		assertThrows(IllegalArgumentException.class, () -> new Position(0,9));//row too low, col too high
+		assertThrows(IllegalArgumentException.class, () -> new Position(9,0));//col too low, row too high
 	}
 	
 	@Test

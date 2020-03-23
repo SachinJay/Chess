@@ -1,5 +1,3 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 /**
  * 
  * @author Sachin Devasahayam
@@ -32,7 +30,7 @@ public class Position
 		Boolean rIsValid = (r <=Constants.MAX_POS && r >= Constants.MIN_POS);
 		if(!cIsValid || !rIsValid)
 		{
-			throw new IllegalArgumentException("Row and column number must be bewteen 1 and 8 inclusive");
+			throw new IllegalArgumentException(Constants.POS_ERR_MSG);
 		}
 		setCol(c); 
 		setRow(r); 
