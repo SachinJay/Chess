@@ -11,9 +11,25 @@ public abstract class Piece
 	
 	public Piece(Side side)
 	{
-		this.side = side;
+		this.setSide(side);
 	}
 	
 	public abstract Boolean canMove(Board board, Square start, Square end);
+
+	/**
+	 * @return the side
+	 */
+	public Side getSide()
+	{
+		return side;
+	}
+
+	/**
+	 * @param side the side to set
+	 */
+	public void setSide(Side side)
+	{
+		this.side = side;
+	}
 	
 }
