@@ -42,6 +42,32 @@ class ChessTests
 		assertThrows(IllegalArgumentException.class, () -> new Position(9,9));//both too high
 		assertThrows(IllegalArgumentException.class, () -> new Position(0,9));//row too low, col too high
 		assertThrows(IllegalArgumentException.class, () -> new Position(9,0));//col too low, row too high
+		
+		//Test stringToPos method
+		assertEquals(1,Position.stringToPos("a1").getCol());
+		assertEquals(1,Position.stringToPos("a1").getRow());
+		
+		assertEquals(2,Position.stringToPos("b2").getCol());
+		assertEquals(2,Position.stringToPos("b2").getRow());
+		
+		assertEquals(3,Position.stringToPos("c3").getCol());
+		assertEquals(3,Position.stringToPos("c3").getRow());
+		
+		assertEquals(4,Position.stringToPos("d4").getCol());
+		assertEquals(4,Position.stringToPos("d4").getRow());
+		
+		assertEquals(5,Position.stringToPos("e5").getCol());
+		assertEquals(5,Position.stringToPos("e5").getRow());
+		
+		assertEquals(6,Position.stringToPos("f6").getCol());
+		assertEquals(6,Position.stringToPos("f6").getRow());
+		
+		assertEquals(7,Position.stringToPos("g7").getCol());
+		assertEquals(7,Position.stringToPos("g7").getRow());
+		
+		assertEquals(8,Position.stringToPos("h8").getCol());
+		assertEquals(8,Position.stringToPos("h8").getRow());
+		
 	}
 	
 	@Test
