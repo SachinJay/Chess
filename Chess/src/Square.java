@@ -17,7 +17,7 @@ public class Square
 	 */
 	public Square()
 	{
-		pos = new Position();
+		setPos(new Position());
 		piece = Optional.ofNullable(null);
 	}
 	
@@ -28,7 +28,7 @@ public class Square
 	 */
 	public Square(Position pos, Optional<Piece> piece)
 	{
-		this.pos = pos; 
+		this.setPos(pos); 
 		this.piece = piece;
 	}
 	
@@ -41,13 +41,39 @@ public class Square
 		return !this.piece.isPresent();
 	}
 	
+	/**
+	 * 
+	 * @param piece the Piece Option to be set 
+	 */
 	public void setPiece(Optional<Piece> piece)
 	{
 		this.piece = piece;
 	}
 	
+	
+	/**
+	 * 
+	 * @return the piece on this square
+	 * @throws NoSuchElementException if square is empty 
+	 */
 	public Piece getPiece()
 	{
 		return this.piece.get();
+	}
+
+	/**
+	 * @return the pos
+	 */
+	public Position getPos()
+	{
+		return pos;
+	}
+
+	/**
+	 * @param pos the pos to set
+	 */
+	public void setPos(Position pos)
+	{
+		this.pos = pos;
 	}
 }
