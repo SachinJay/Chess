@@ -38,7 +38,16 @@ public class Square
 	 */
 	public boolean isEmpty()
 	{
-		return this.piece.isPresent();
+		return !this.piece.isPresent();
 	}
-
+	
+	public void setPiece(Optional<Piece> piece)
+	{
+		this.piece = piece;
+	}
+	
+	public Piece getPiece()
+	{
+		return this.piece.get();
+	}
 }
