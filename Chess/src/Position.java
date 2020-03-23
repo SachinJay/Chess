@@ -109,6 +109,33 @@ public class Position
 
 	public static Position stringToPos(String pos)
 	{
-		return null;		
+		if(pos.length() != 2)
+		{
+			throw new IllegalArgumentException();
+		}
+		else
+		{
+			//Get the first part of the string, i.e. just the letter
+			String letter = pos.substring(0,1);
+			
+			int num2 = Integer.parseInt(pos.substring(1));
+			
+			int num1 = 0; 
+			
+			switch(letter)
+			{
+			case "a": num1 = 1;
+			case "b": num1 = 2;
+			case "c": num1 = 3;
+			case "d": num1 = 4;
+			case "e": num1 = 5;
+			case "f": num1 = 6;
+			case "g": num1 = 7;
+			case "h": num1 = 8;
+			default: num1 = 10; //nonsense number, causes illegal argument to be thrown by Position constructor
+			}
+			
+			return new Position(num1,num2);
+		}
 	}
 }
