@@ -63,7 +63,29 @@ class ChessTests
 		//To 'work' on an empty square means it throws the right excpetion
 		assertThrows(NoSuchElementException.class , () -> sqr1.getPiece());
 		assertEquals(pawn, sqr2.getPiece());
+	}
+	
+	@Test
+	void pieceTests()
+	{
+		//Test that the get and set side methods work
 		
+		//Creates a black pawn
+		Piece pawn = new Pawn(Side.BLACK);
+		assertEquals(Side.BLACK, pawn.getSide());
+		pawn.setSide(Side.WHITE); //change pawn color to white
+		assertEquals(Side.WHITE, pawn.getSide());
+		
+		//Create black knight
+		Piece knight = new Knight(Side.BLACK);
+		assertEquals(Side.BLACK, knight.getSide());
+		knight.setSide(Side.WHITE); //change knight color to white
+		assertEquals(Side.WHITE, knight.getSide());
+	}
+	
+	@Test
+	void knightTests()
+	{
 		
 	}
 
