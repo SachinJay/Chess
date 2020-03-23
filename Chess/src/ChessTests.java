@@ -21,6 +21,7 @@ class ChessTests
 		Position pos6 = new Position(6,6);
 		Position pos7 = new Position(7,7);
 		Position pos8 = new Position(8,8);
+		Position pos9 = new Position(5,8);
 	
 		//Covers all cases for the Position constructor
 		assertEquals("a1",pos.toString() );
@@ -32,6 +33,7 @@ class ChessTests
 		assertEquals("f6",pos6.toString());
 		assertEquals("g7",pos7.toString());
 		assertEquals("h8",pos8.toString());
+		assertEquals("e8",pos9.toString());
 		
 		//Invalid attempts at constructing a position should throw IllegalArgumentException
 		assertThrows(IllegalArgumentException.class, () -> new Position(0,8));// row too low
@@ -67,6 +69,9 @@ class ChessTests
 		
 		assertEquals(8,Position.stringToPos("h8").getCol());
 		assertEquals(8,Position.stringToPos("h8").getRow());
+		
+		assertEquals(5,Position.stringToPos("e8").getCol());
+		assertEquals(8,Position.stringToPos("e8").getRow());
 		
 	}
 	
@@ -121,8 +126,10 @@ class ChessTests
 		
 		assertFalse(a1.isEmpty());
 		assertFalse(a2.isEmpty());
-		assertTrue(a3.isEmpty());
+//		assertTrue(a3.isEmpty());
 		assertFalse(e1.isEmpty());
+		
+		assertEquals("a2", a2.getPos().toString());
 		
 		
 		
