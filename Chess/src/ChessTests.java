@@ -126,7 +126,7 @@ class ChessTests
 		
 		assertFalse(a1.isEmpty());
 		assertFalse(a2.isEmpty());
-//		assertTrue(a3.isEmpty());
+		assertTrue(a3.isEmpty());
 		assertFalse(e1.isEmpty());
 		
 		assertEquals("a2", a2.getPos().toString());

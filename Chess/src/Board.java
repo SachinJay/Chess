@@ -43,7 +43,7 @@ public class Board
 		
 		//Black pawns
 		board[6][0] = new Square(new Position(1,7), new Pawn(Side.BLACK));
-		board[6][1] = new Square(new Position(7,7), new Pawn(Side.BLACK));
+		board[6][1] = new Square(new Position(2,7), new Pawn(Side.BLACK));
 		board[6][2] = new Square(new Position(3,7), new Pawn(Side.BLACK));
 		board[6][3] = new Square(new Position(4,7), new Pawn(Side.BLACK));
 		board[6][4] = new Square(new Position(5,7), new Pawn(Side.BLACK));
@@ -52,7 +52,13 @@ public class Board
 		board[6][7] = new Square(new Position(8,7), new Pawn(Side.BLACK));
 		
 		//Remaining squares have no pieces on them
-//		for(int r = )
+		for(int r = 2; r <= 5; r++)
+		{
+			for(int c = 0; c <= 7; c++)
+			{
+				board[r][c] = new Square(new Position(c+1,r+1),null);
+			}
+		}
 	}
 
 	/**
