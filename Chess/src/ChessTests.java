@@ -124,10 +124,39 @@ class ChessTests
 		Square a3 = board.getSquare("a3"); //blank square
 		Square e1 = board.getSquare("e1"); //white queen
 		
+		//Select tests
 		assertFalse(a1.isEmpty());
 		assertFalse(a2.isEmpty());
 		assertTrue(a3.isEmpty());
 		assertFalse(e1.isEmpty());
+		
+		//Comprehensive tests
+		for(int c = 1; c <= 8; c++)
+		{
+			//White rows
+			for(int r = 1; r<= 2; r++)
+			{
+				Square curSquare = board.getSquare(new Position(c,r));
+				assertFalse(curSquare.isEmpty());
+				assertEquals(Side.WHITE, curSquare.getPiece().getSide());
+			}
+			
+			//Space between both sides is empty
+			for(int r = 3; r <=6; r++)
+			{
+				Square curSquare = board.getSquare(new Position(c,r));
+				assertTrue(curSquare.isEmpty());
+			}
+			
+			//Black rows are non empty
+			for(int r = 7; r <=8; r++)
+			{
+				Square curSquare = board.getSquare(new Position(c,r));
+				assertFalse(curSquare.isEmpty());
+				assertEquals(Side.BLACK, curSquare.getPiece().getSide());
+			}
+			
+		}
 		
 		assertEquals("a2", a2.getPos().toString());
 		
