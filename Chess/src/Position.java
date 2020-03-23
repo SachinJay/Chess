@@ -24,11 +24,16 @@ public class Position
 	 * Creates the position c,r
 	 * @param c the column number to be set
 	 * @param r the row number to be set
+	 * @throws IllegalArgumentException if row or column number are not in bounds
 	 */
 	public Position(int c, int r)
 	{
-		assert (c <=8 && c >= 1);
-		assert (r <=8 && r >= 1);
+		Boolean cIsValid = (c <= Constants.MAX_POS && c >= Constants.MIN_POS);
+		Boolean rIsValid = (r <=Constants.MAX_POS && r >= Constants.MIN_POS);
+		if(!cIsValid || !rIsValid)
+		{
+			throw new IllegalArgumentException("Row and column number must be bewteen 1 and 8 inclusive");
+		}
 		setCol(c); 
 		setRow(r); 
 	}

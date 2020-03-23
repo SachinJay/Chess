@@ -12,15 +12,30 @@ class ChessTests
 	void positionTests()
 	{
 		//Default position
-		Position pos1 = new Position();
+		Position pos = new Position();
 		
-		//TODO: Add a test for each position on the diagonal
-		Position pos2 = new Position(1,1);
-		Position pos3 = new Position(4,4);
+		//Each position along the diagonal
+		Position pos1 = new Position(1,1);
+		Position pos2 = new Position(2,2);
+		Position pos3 = new Position(3,3);
+		Position pos4 = new Position(4,4);
+		Position pos5 = new Position(5,5);
+		Position pos6 = new Position(6,6);
+		Position pos7 = new Position(7,7);
+		Position pos8 = new Position(8,8);
+	
+		//Covers all cases for the Position constructor
+		assertEquals("a1",pos.toString() );
+		assertEquals("a1",pos1.toString());
+		assertEquals("b2",pos2.toString());
+		assertEquals("c3",pos3.toString());
+		assertEquals("d4",pos4.toString() );
+		assertEquals("e5",pos5.toString());
+		assertEquals("f6",pos6.toString());
+		assertEquals("g7",pos7.toString());
+		assertEquals("h8",pos8.toString());
 		
-		assertEquals("a1",pos1.toString() );
-		assertEquals("a1",pos2.toString() );
-		assertEquals("d4",pos3.toString() );
+		//Invalid attempts at constucting a position
 	}
 	
 	@Test
@@ -35,8 +50,8 @@ class ChessTests
 		Square sqr2 = new Square(new Position(), pawn);
 		
 		//Test default and non-default constructors
-		assertEquals(true, sqr1.isEmpty()); //Default square is empty
-		assertEquals(false, sqr2.isEmpty()); //Square with a pawn on it is not empty
+		assertTrue(sqr1.isEmpty()); //Default square is empty
+		assertFalse(sqr2.isEmpty()); //Square with a pawn on it is not empty
 		
 		//Test that the getPiece method works for empty and filled squares 
 		//To 'work' on an empty square means it throws the right excpetion
