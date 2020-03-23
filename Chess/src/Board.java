@@ -67,12 +67,22 @@ public class Board
 		this.board = board;
 	}
 	
-	
+	/**
+	 * Returns square at given position
+	 * @param pos the position of the Square to be returned
+	 * @return the square at position pos
+	 */
 	public Square getSquare(Position pos)
 	{
 		return board[pos.getRow()-1][pos.getCol()-1];
 	}
 	
+	/**
+	 * Returns square at given position
+	 * @param pos the position of the Square to be returned, a string in char then int format
+	 * ex. a1 is a valid position but 1a is not
+	 * @return the square at position pos
+	 */
 	public Square getSquare(String pos)
 	{
 		return getSquare(Position.stringToPos(pos));
