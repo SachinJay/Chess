@@ -64,7 +64,7 @@ public class Position
 	@Override
 	public String toString()
 	{
-		String pos = posToStr(this.getCol()) + ","+ this.getRow();
+		String pos = posToStr(this.getCol())+ this.getRow();
 		
 		return pos;
 	}
