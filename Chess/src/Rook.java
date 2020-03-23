@@ -5,7 +5,7 @@ public class Rook extends Piece
 	public Rook(Side side)
 	{
 		super(side);
-		// TODO Auto-generated constructor stub
+		this.setName("Rook");
 	}
 
 	@Override

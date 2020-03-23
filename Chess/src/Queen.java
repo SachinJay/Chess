@@ -5,7 +5,7 @@ public class Queen extends Piece
 	public Queen(Side side)
 	{
 		super(side);
-		// TODO Auto-generated constructor stub
+		this.setName("Queen");
 	}
 
 	@Override

@@ -9,6 +9,8 @@ public abstract class Piece
 	/**Which side the piece is on*/
 	private Side side; 
 	
+	private String name; 
+	
 	public Piece(Side side)
 	{
 		this.setSide(side);
@@ -30,6 +32,18 @@ public abstract class Piece
 	public void setSide(Side side)
 	{
 		this.side = side;
+	}
+	
+	public String toString()
+	{
+		String side = this.getSide().toString();
+		//Return name in format: Color Name instead of COLOR Name
+		return side.charAt(0) + side.substring(1).toLowerCase() + " " + this.name;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name; 
 	}
 	
 }

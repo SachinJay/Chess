@@ -5,6 +5,7 @@ public class Bishop extends Piece
 	public Bishop(Side side)
 	{
 		super(side);
+		this.setName("Bishop");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -14,5 +15,5 @@ public class Bishop extends Piece
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

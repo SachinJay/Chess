@@ -5,7 +5,7 @@ public class King extends Piece
 	public King(Side side)
 	{
 		super(side);
-		// TODO Auto-generated constructor stub
+		this.setName("King");
 	}
 
 	@Override
