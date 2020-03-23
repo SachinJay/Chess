@@ -26,10 +26,10 @@ public class Square
 	 * @param pos the position of the square
 	 * @param piece the piece option that is on this square. Optional of null if the square is blank
 	 */
-	public Square(Position pos, Optional<Piece> piece)
+	public Square(Position pos, Piece piece)
 	{
 		this.setPos(pos); 
-		this.piece = piece;
+		this.piece = Optional.ofNullable(piece);
 	}
 	
 	/**
@@ -45,9 +45,9 @@ public class Square
 	 * 
 	 * @param piece the Piece Option to be set 
 	 */
-	public void setPiece(Optional<Piece> piece)
+	public void setPiece(Piece piece)
 	{
-		this.piece = piece;
+		this.piece = Optional.ofNullable(piece);
 	}
 	
 	

@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -28,8 +29,21 @@ class ChessTests
 		//Default square
 		Square sqr1 = new Square();
 		
-		//Test that the default square is empty
-		assertEquals(true, sqr1.isEmpty());
+		Pawn pawn = new Pawn(Side.WHITE);
+		
+		//Square in default position with pawn on it
+		Square sqr2 = new Square(new Position(), pawn);
+		
+		//Test default and non-default constructors
+		assertEquals(true, sqr1.isEmpty()); //Default square is empty
+		assertEquals(false, sqr2.isEmpty()); //Square with a pawn on it is not empty
+		
+		//Test that the getPiece method works for empty and filled squares 
+		//To 'work' on an empty square means it throws the right excpetion
+		assertThrows(NoSuchElementException.class , () -> sqr1.getPiece());
+		assertEquals(pawn, sqr2.getPiece());
+		
+		
 	}
 
 }
