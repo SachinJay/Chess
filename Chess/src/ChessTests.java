@@ -158,7 +158,16 @@ class ChessTests
 			
 		}
 		
+		//Test that the positions are correct
+		assertEquals("a1", a1.getPos().toString());
 		assertEquals("a2", a2.getPos().toString());
+		assertEquals("a3", a3.getPos().toString());
+		assertEquals("e1", e1.getPos().toString());
+		
+		//Test that the pieces are correct
+		assertEquals("White Rook", a1.getPiece().toString());
+		assertEquals("White Pawn", a2.getPiece().toString());
+		assertEquals("White Queen", e1.getPiece().toString());
 		
 		
 		
