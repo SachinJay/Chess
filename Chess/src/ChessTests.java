@@ -110,6 +110,25 @@ class ChessTests
 	}
 	
 	@Test
+	void boardTests()
+	{
+		Board board = new Board();
+		
+		Square a1 = board.getSquare("a1");  //a white rook
+		Square a2 = board.getSquare("a2");  //a white pawn
+		Square a3 = board.getSquare("a3"); //blank square
+		Square e1 = board.getSquare("e1"); //white queen
+		
+		assertFalse(a1.isEmpty());
+		assertFalse(a2.isEmpty());
+		assertTrue(a3.isEmpty());
+		assertFalse(e1.isEmpty());
+		
+		
+		
+	}
+	
+	@Test
 	void knightTests()
 	{
 		

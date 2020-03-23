@@ -10,6 +10,7 @@ public class Board
 	
 	public void defaultBoard()
 	{
+		board = new Square[Constants.MAX_POS][Constants.MAX_POS];
 		//First white row
 		board[0][0] = new Square(new Position(1,1), new Rook(Side.WHITE));
 		board[0][1] = new Square(new Position(1,2), new Knight(Side.WHITE));
