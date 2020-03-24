@@ -286,9 +286,15 @@ class ChessTests
 			String pos1 = randPos(1, 1, 1, 8);
 			String pos2 = randPos(1, 8, 1, 1);
 			
+			System.out.println(pos1 + "\n" + pos2);
+			
 			assertFalse(rook.canMove(board, square, board.getSquare(pos1)));
 			assertFalse(rook.canMove(board, square, board.getSquare(pos2)));
 		}
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		
 		//remove all relevant white pieces so rook can move freely
 		board.setSquare("a2", new Square(new Position(1,2), null));

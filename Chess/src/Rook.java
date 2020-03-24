@@ -19,8 +19,8 @@ public class Rook extends Piece
 		int cStart = start.getPos().getCol();
 		int cEnd = end.getPos().getCol();
 		
-		int changeInR = rStart - rEnd;
-		int changeInC = cStart - cEnd;
+		int changeInR = rEnd - rStart;
+		int changeInC = cEnd - cStart;
 		
 		Boolean rForwards = changeInR >= 0;
 		Boolean cForwards = changeInC >= 0;
@@ -29,10 +29,15 @@ public class Rook extends Piece
 		changeInR = Math.abs(changeInR);
 		changeInC = Math.abs(changeInC);
 		
-		Boolean pathIsStraightLine = changeInR !=0 && changeInC != 0;
+		Boolean pathIsStraightLine = changeInR ==0 || changeInC == 0;
 		
-		if(!pathIsStraightLine)
+		//TODO delete the print statements, they only exist for debugging
+		
+		if(!pathIsStraightLine || start.equals(end))
 		{
+			System.out.println("Path isn't a straight line");
+			System.out.println(changeInC);
+			System.out.println(changeInR);
 			return false;
 		}
 		else
@@ -54,15 +59,22 @@ public class Rook extends Piece
 					Position curPos = new Position(c,rStart);
 					if(!board.getSquare(curPos).isEmpty())
 					{
+						System.out.println("Went through the columns, ran into a piece");
 						return false;
 					}
 				}
 			}
 			else
 			{
-				for(int r = rStart + rInc; r < rEnd; r+=rInc)
+				for(int r = (rStart + rInc); r < rEnd; r+=rInc)
 				{
-					return false;
+					System.out.println(cStart + "\n" + r);
+					Position curPos = new Position(cStart,r);
+					if(!board.getSquare(curPos).isEmpty())
+					{
+						System.out.println("Went through the rows, ran into a piece");
+						return false;
+					}
 				}
 			}
 			
