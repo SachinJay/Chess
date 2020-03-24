@@ -270,11 +270,11 @@ class ChessTests
 	void rookTests()
 	{
 		//TODO: Checklist
-		//Valid space to move to, but there's an ally there blocking you
-		//Valid space to move to, and its empty
-		//Valid space to move to, and can capture
-		//Invalid space to move to (for example, space you start at)
-		//Otherwise all good except that there is a piece on the rook's path
+		//[x]Valid space to move to, but there's an ally there blocking you
+		//[x]Valid space to move to, and its empty
+		//[x]Valid space to move to, and can capture
+		//[x]Invalid space to move to (for example, space you start at)
+		//[]Otherwise all good except that there is a piece on the rook's path
 		
 		Board board = new Board();
 		Square square = board.getSquare("a1");
@@ -286,15 +286,9 @@ class ChessTests
 			String pos1 = randPos(1, 1, 1, 8);
 			String pos2 = randPos(1, 8, 1, 1);
 			
-			System.out.println(pos1 + "\n" + pos2);
-			
 			assertFalse(rook.canMove(board, square, board.getSquare(pos1)));
 			assertFalse(rook.canMove(board, square, board.getSquare(pos2)));
 		}
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
 		
 		//remove all relevant white pieces so rook can move freely
 		board.setSquare("a2", new Square(new Position(1,2), null));
@@ -315,6 +309,48 @@ class ChessTests
 		assertTrue(rook.canMove(board, square, board.getSquare("f1")));
 		assertTrue(rook.canMove(board, square, board.getSquare("g1")));
 		assertTrue(rook.canMove(board, square, board.getSquare("h1")));
+		
+		//*******Begin rook capture tests********//
+		
+		//Now that the pawn at a2 was removed, rook should be able to get the pawn at a7
+		assertTrue(rook.canMove(board, square, board.getSquare("a7")));
+		
+		//fill two valid spaces with enemy pawns
+		board.setSquare("a2", new Square(new Position(1,2), new Pawn(Side.BLACK)));
+		assertTrue(rook.canMove(board, square, board.getSquare("a2")));
+		
+		//fill then unfill 
+		board.setSquare("b1", new Square(new Position(2,1), new Pawn(Side.BLACK)));
+		assertTrue(rook.canMove(board, square, board.getSquare("b1")));
+		board.setSquare("b1", new Square(new Position(2,1), null));
+		
+		board.setSquare("c1", new Square(new Position(3,1), new Pawn(Side.BLACK)));
+		assertTrue(rook.canMove(board, square, board.getSquare("c1")));		
+		board.setSquare("c1", new Square(new Position(3,1), null));
+		
+		board.setSquare("d1", new Square(new Position(4,1), new Pawn(Side.BLACK)));
+		assertTrue(rook.canMove(board, square, board.getSquare("d1")));
+		board.setSquare("d1", new Square(new Position(4,1), null));
+		
+		board.setSquare("e1", new Square(new Position(5,1), new Pawn(Side.BLACK)));
+		assertTrue(rook.canMove(board, square, board.getSquare("e1")));
+		board.setSquare("e1", new Square(new Position(5,1), null));
+		
+		//*******End rook capture tests********//
+		
+		//invalid spaces
+		for(int i = 0; i < 64; i++)
+		{
+			String pos = randPos(2, 8, 2, 8);
+			assertFalse(rook.canMove(board, square, board.getSquare(pos)));
+		}
+		
+		//Put a piece in each of the rook's paths
+		board.setSquare("a4", new Square(new Position(1,4), new Pawn(Side.BLACK)));
+		board.setSquare("e1", new Square(new Position(5,1), new Pawn(Side.BLACK)));
+		
+		assertFalse(rook.canMove(board, square, board.getSquare("a7")));
+		assertFalse(rook.canMove(board, square, board.getSquare("h1")));
 		
 		
 	}
