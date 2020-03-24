@@ -25,29 +25,19 @@ public class Rook extends Piece
 		Boolean rForwards = changeInR >= 0;
 		Boolean cForwards = changeInC >= 0;
 		
-		//TODO do I ever need to use this absolute value? I don't think so, maybe delete this
-		changeInR = Math.abs(changeInR);
-		changeInC = Math.abs(changeInC);
-		
 		Boolean pathIsStraightLine = changeInR ==0 || changeInC == 0;
-		
-		//TODO delete the print statements, they only exist for debugging
 		
 		if(!pathIsStraightLine || start.equals(end))
 		{
-			System.out.println("Path isn't a straight line");
-			System.out.println(changeInC);
-			System.out.println(changeInR);
 			return false;
 		}
 		else
 		{
-			//TODO perform check that no other pieces are in the way from start to end
+			//Perform check that no other pieces are in the way from start to end
 			//Obviously, color of pieces does not matter for the inbetween pieces
 			//What matters is that the in between pieces do not exist
 			
 			//Rook could be moving forwards or backwards in a row or column, need to specify
-			
 			//Set whether we increment or decrement
 			int rInc = rForwards? 1 : -1;
 			int cInc = cForwards? 1 : -1;
@@ -59,7 +49,6 @@ public class Rook extends Piece
 					Position curPos = new Position(c,rStart);
 					if(!board.getSquare(curPos).isEmpty())
 					{
-						System.out.println("Went through the columns, ran into a piece");
 						return false;
 					}
 				}
@@ -68,11 +57,9 @@ public class Rook extends Piece
 			{
 				for(int r = (rStart + rInc); r < rEnd; r+=rInc)
 				{
-					System.out.println(cStart + "\n" + r);
 					Position curPos = new Position(cStart,r);
 					if(!board.getSquare(curPos).isEmpty())
 					{
-						System.out.println("Went through the rows, ran into a piece");
 						return false;
 					}
 				}
