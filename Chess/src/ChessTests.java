@@ -168,14 +168,52 @@ class ChessTests
 		assertEquals("White Rook", a1.getPiece().toString());
 		assertEquals("White Pawn", a2.getPiece().toString());
 		assertEquals("White Queen", e1.getPiece().toString());
-		
-		
-		
 	}
 	
 	@Test
 	void knightTests()
 	{
+		Board board = new Board();
+		Square knightSquare = board.getSquare("b1");
+		Knight knight = (Knight) knightSquare.getPiece();
+		
+		//This piece can indeed move to these two spots only
+		assertTrue(knight.canMove(board, knightSquare , board.getSquare("c3")));
+		assertTrue(knight.canMove(board, knightSquare , board.getSquare("a3")));
+		
+		//Check that a place that is two knight moves away is not reachable
+		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d5")));
+		
+		//Check that knight cannot move to random spot on board
+		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d7")));
+		
+		//Check that a square that is valid for a knight to move to but has a pawn of the same
+		//side cannot be moved to
+		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d2")));
+		
+		//TODO Still need to test cases when one can capture opponents piece
+	}
+	
+	@Test
+	void kingTests()
+	{
+		//TODO: Test a few things
+		//Valid space to move to, but there's an ally there blocking you
+		//Valid space to move to, and its empty
+		//Valid space to move to, and can capture
+		//Invalid space to move to (for example, space you start at)
+		
+		Board board = new Board();
+		Square square = board.getSquare("d1");
+		King king = (King) square.getPiece();
+		
+		//Space to move but white piece is blocking
+		assertFalse(king.canMove(board, square, board.getSquare("d2")));
+		assertFalse(king.canMove(board, square, board.getSquare("e1")));
+		assertFalse(king.canMove(board, square, board.getSquare("c1")));
+		assertFalse(king.canMove(board, square, board.getSquare("e2")));
+		assertFalse(king.canMove(board, square, board.getSquare("c2")));
+		
 		
 	}
 

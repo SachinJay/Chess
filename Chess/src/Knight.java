@@ -21,10 +21,9 @@ public class Knight extends Piece
 		//true iff the start and end position form a valid knight shaped 'L'
 		Boolean isValidKnightMove = changeInX * changeInY == Constants.KNIGHT_PRODUCT;
 		
-		//True if the end square has a piece of opposing side
-		Boolean endHasEnemy = !end.getPiece().getSide().equals(this.getSide());
-		
-		return isValidKnightMove && (end.isEmpty() || endHasEnemy);
+		//Cannot put second part of disjunction into a variable because it could throw error
+		//If it does throw an error though, it will not be reached because this will short circuit
+		return isValidKnightMove && (end.isEmpty() || !end.getPiece().getSide().equals(this.getSide()));
 	}
 	
 }
