@@ -184,20 +184,27 @@ class ChessTests
 		//Check that a place that is two knight moves away is not reachable
 		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d5")));
 		
-		//Check that knight cannot move to random spot on board in no man's land
-		String pos = randPos(1, 8, 3, 6);
-		
-		while(pos.equals("c3") || pos.equals("a3"))
+		//Check that knight cannot move to random spot on board, except the two it can move to
+		for(int i = 0; i < 64; i++)
 		{
-			pos = randPos(1, 8, 3, 6);
+			String pos = randPos(1, 8, 3, 8);
+			while(pos.equals("c3") || pos.equals("a3"))
+			{
+				pos = randPos(1, 8, 3, 6);
+			}
+			assertFalse(knight.canMove(board, knightSquare , board.getSquare(pos)));
 		}
-		assertFalse(knight.canMove(board, knightSquare , board.getSquare(pos)));
 		
-		//Check that a square that is valid for a knight to move to but has a pawn of the same
-		//side cannot be moved to
-		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d2")));
+		//Empty a spot so that the knight can move there as well
+		board.setSquare("d2", new Square(new Position(4,2), null));
+		assertTrue(knight.canMove(board, knightSquare, board.getSquare("d2")));
 		
-		//TODO Still need to test cases when one can capture opponents piece
+		//Fill empty spot with black pawns, knight should be able to move there now
+		//Further, fill the two spots the knight could originally move to with black pawns
+		//Knight should now also be able to move there
+		board.setSquare("d2", new Square(new Position(4,2), new Pawn(Side.BLACK)));
+		board.setSquare("a3", new Square(new Position(1,3), new Pawn(Side.BLACK)));
+		board.setSquare("c3", new Square(new Position(3,3), new Pawn(Side.BLACK)));
 	}
 	
 	@Test
@@ -232,6 +239,30 @@ class ChessTests
 		assertTrue(king.canMove(board, square, board.getSquare("c1")));
 		assertTrue(king.canMove(board, square, board.getSquare("e2")));
 		assertTrue(king.canMove(board, square, board.getSquare("c2")));	
+		
+		//Assert that king cannot move to invalid spots (i.e. anywhere not the above positions)
+		for(int i  = 0; i < 64; i++)
+		{
+			String pos = randPos(1, 8, 3, 8);
+			String pos2 = randPos(1,2,1,2);
+			String pos3 = randPos(6,8,1,2);
+			assertFalse(king.canMove(board, square, board.getSquare(pos)));
+			assertFalse(king.canMove(board, square, board.getSquare(pos2)));
+			assertFalse(king.canMove(board, square, board.getSquare(pos3)));
+		}
+		
+		//Change board so that there are capturable pieces in valid spaces
+		board.setSquare("d2", new Square(new Position(4,2), new Pawn(Side.BLACK)));
+		board.setSquare("e1", new Square(new Position(5,1), new Pawn(Side.BLACK)));
+		board.setSquare("c1", new Square(new Position(3,1), new Pawn(Side.BLACK)));
+		board.setSquare("e2", new Square(new Position(5,2), new Pawn(Side.BLACK)));
+		board.setSquare("c2", new Square(new Position(3,2), new Pawn(Side.BLACK)));
+		
+		assertTrue(king.canMove(board, square, board.getSquare("d2")));
+		assertTrue(king.canMove(board, square, board.getSquare("e1")));
+		assertTrue(king.canMove(board, square, board.getSquare("c1")));
+		assertTrue(king.canMove(board, square, board.getSquare("e2")));
+		assertTrue(king.canMove(board, square, board.getSquare("c2")));
 		
 	}
 	
