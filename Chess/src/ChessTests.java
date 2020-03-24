@@ -290,6 +290,26 @@ class ChessTests
 			assertFalse(rook.canMove(board, square, board.getSquare(pos2)));
 		}
 		
+		//remove all relevant white pieces so rook can move freely
+		board.setSquare("a2", new Square(new Position(1,2), null));
+		board.setSquare("b1", new Square(new Position(2,1), null));
+		board.setSquare("c1", new Square(new Position(3,1), null));
+		board.setSquare("d1", new Square(new Position(4,1), null));
+		board.setSquare("e1", new Square(new Position(5,1), null));
+		board.setSquare("f1", new Square(new Position(6,1), null));
+		board.setSquare("g1", new Square(new Position(7,1), null));
+		board.setSquare("h1", new Square(new Position(8,1), null));
+		
+		//Rook can move to valid empty spaces
+		assertTrue(rook.canMove(board, square, board.getSquare("a2")));
+		assertTrue(rook.canMove(board, square, board.getSquare("b1")));
+		assertTrue(rook.canMove(board, square, board.getSquare("c1")));
+		assertTrue(rook.canMove(board, square, board.getSquare("d1")));
+		assertTrue(rook.canMove(board, square, board.getSquare("e1")));
+		assertTrue(rook.canMove(board, square, board.getSquare("f1")));
+		assertTrue(rook.canMove(board, square, board.getSquare("g1")));
+		assertTrue(rook.canMove(board, square, board.getSquare("h1")));
+		
 		
 	}
 	
