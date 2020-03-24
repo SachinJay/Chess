@@ -266,6 +266,33 @@ class ChessTests
 		
 	}
 	
+	@Test
+	void rookTests()
+	{
+		//TODO: Checklist
+		//Valid space to move to, but there's an ally there blocking you
+		//Valid space to move to, and its empty
+		//Valid space to move to, and can capture
+		//Invalid space to move to (for example, space you start at)
+		//Otherwise all good except that there is a piece on the rook's path
+		
+		Board board = new Board();
+		Square square = board.getSquare("a1");
+		Rook rook = (Rook) square.getPiece();
+		
+		//Valid space to move but white is blocking 
+		for(int i = 0; i < 64; i++)
+		{
+			String pos1 = randPos(1, 1, 1, 8);
+			String pos2 = randPos(1, 8, 1, 1);
+			
+			assertFalse(rook.canMove(board, square, board.getSquare(pos1)));
+			assertFalse(rook.canMove(board, square, board.getSquare(pos2)));
+		}
+		
+		
+	}
+	
 	/**
 	 * Creates a string that represents a random position on the board
 	 * @param lr lower bound inclusive on the row

@@ -22,10 +22,7 @@ public class Rook extends Piece
 		int changeInR = rStart - rEnd;
 		int changeInC = cStart - cEnd;
 		
-		Boolean rBackwards = changeInR < 0;
 		Boolean rForwards = changeInR >= 0;
-		
-		Boolean cBackwards = changeInC < 0;
 		Boolean cForwards = changeInC >= 0;
 		
 		//TODO do I ever need to use this absolute value? I don't think so, maybe delete this
