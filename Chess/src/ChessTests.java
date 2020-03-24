@@ -274,7 +274,7 @@ class ChessTests
 		//[x]Valid space to move to, and its empty
 		//[x]Valid space to move to, and can capture
 		//[x]Invalid space to move to (for example, space you start at)
-		//[]Otherwise all good except that there is a piece on the rook's path
+		//[x]Otherwise all good except that there is a piece on the rook's path
 		
 		Board board = new Board();
 		Square square = board.getSquare("a1");
@@ -353,6 +353,83 @@ class ChessTests
 		assertFalse(rook.canMove(board, square, board.getSquare("h1")));
 		
 		
+	}
+	
+	@Test
+	void pawnTests()
+	{
+		//TODO: Checklist
+		//[x]For all of the below, do it for both black and white pawns
+		//[x]Valid space to move to, but there's an ally there blocking you
+		//[x]Valid space to move to, and its empty
+		//----[x]For one space and two space
+		//[x]Valid space to move to, and can capture
+		//[x]Valid space to move two spaces towards but there is an intermediary piece blocking
+		//[x]Invalid space to move to (for example, space you start at)
+		
+		Board board = new Board();
+		Pawn whitePawn = (Pawn)board.getSquare("d2").getPiece();
+		Square whiteSquare = board.getSquare("d2");
+		Pawn blackPawn = (Pawn) board.getSquare("d7").getPiece();
+		Square blackSquare = board.getSquare("d7");
+		
+		//Two space and one space white
+		assertTrue(whitePawn.canMove(board, whiteSquare, board.getSquare("d3")));
+		assertTrue(whitePawn.canMove(board, whiteSquare, board.getSquare("d4")));
+		
+		//Two space and one space black
+		assertTrue(blackPawn.canMove(board, blackSquare, board.getSquare("d6")));
+		assertTrue(blackPawn.canMove(board, blackSquare, board.getSquare("d5")));
+		
+		//Add pieces for white capture
+		board.setSquare("c3", new Square(new Position(3,3),new Pawn(Side.BLACK)));
+		board.setSquare("e3", new Square(new Position(5,3), new Pawn(Side.BLACK)));
+		
+		//Add pieces for black capture
+		board.setSquare("c6", new Square(new Position(3,6),new Pawn(Side.WHITE)));
+		board.setSquare("e6", new Square(new Position(5,6), new Pawn(Side.WHITE)));
+		
+		//Test capture ability white
+		assertTrue(whitePawn.canMove(board, whiteSquare, board.getSquare("c3")));
+		assertTrue(whitePawn.canMove(board, whiteSquare, board.getSquare("e3")));
+		
+		//Test capture ability black
+		assertTrue(blackPawn.canMove(board, blackSquare, board.getSquare("c6")));
+		assertTrue(blackPawn.canMove(board, blackSquare, board.getSquare("e6")));
+		
+		//Put allies in capturable position
+		board.setSquare("c3", new Square(new Position(3,3),new Pawn(Side.WHITE)));
+		board.setSquare("e3", new Square(new Position(5,3), new Pawn(Side.WHITE)));
+		board.setSquare("c6", new Square(new Position(3,6),new Pawn(Side.BLACK)));
+		board.setSquare("e6", new Square(new Position(5,6), new Pawn(Side.BLACK)));
+		
+		//Test you can't capture allied pieces
+		assertFalse(whitePawn.canMove(board, whiteSquare, board.getSquare("c3")));
+		assertFalse(whitePawn.canMove(board, whiteSquare, board.getSquare("e3")));
+		assertFalse(blackPawn.canMove(board, blackSquare, board.getSquare("c6")));
+		assertFalse(blackPawn.canMove(board, blackSquare, board.getSquare("e6")));
+		
+		//Put allies in blocking positions
+		board.setSquare("d3", new Square(new Position(4,3), new Pawn(Side.WHITE)));
+		board.setSquare("d6", new Square(new Position(4,6),new Pawn(Side.BLACK)));
+		
+		//Test you cannot move where your allies are
+		assertFalse(whitePawn.canMove(board, whiteSquare, board.getSquare("d3")));
+		assertFalse(blackPawn.canMove(board, blackSquare, board.getSquare("d6")));
+		
+		//Intermediary blocking two space movement that would otherwise be okay
+		assertFalse(whitePawn.canMove(board, whiteSquare, board.getSquare("d4")));
+		assertFalse(blackPawn.canMove(board, blackSquare, board.getSquare("d5")));
+		
+		//Invalid spots
+		for(int i = 0; i < 64; i++)
+		{
+			String posWhite = randPos(1, 8, 5,8);
+			assertFalse(whitePawn.canMove(board, whiteSquare, board.getSquare(posWhite)));
+			
+			String posBlack = randPos(1,8,1,4);
+			assertFalse(blackPawn.canMove(board, blackSquare, board.getSquare(posBlack)));
+		}
 	}
 	
 	/**

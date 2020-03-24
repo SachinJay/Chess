@@ -28,8 +28,8 @@ public class Pawn extends Piece
 		int endRow = end.getPos().getRow();
 		int endCol = end.getPos().getCol();
 		
-		Piece endPiece = end.getPiece();
-		Side endSide = endPiece.equals(null)? null:endPiece.getSide();
+		Piece endPiece = end.isEmpty()? null:end.getPiece();
+		Side endSide = endPiece == null? null:endPiece.getSide();
 		
 		Side side = this.getSide();
 		
@@ -45,12 +45,16 @@ public class Pawn extends Piece
 		Boolean whiteMoveDiagonal = endRow-startRow == 1 && diagonalMove;
 		Boolean blackMoveDiagonal = endRow-startRow == -1 && diagonalMove;
 		
+		//TODO also have to check in the two move case that nothing is in the way
+		//That is, have to check you're not hopping over anyone
 		
 		if(side.equals(Side.WHITE))
 		{
 			if(startRow == Constants.WHITE_PAWN_START)
 			{
-				return (whiteMoveOne && end.isEmpty()) || (whiteMoveTwo && end.isEmpty()) 
+				Position intermediate = new Position(startCol, startRow+1);
+				Square inter = board.getSquare(intermediate);
+				return (whiteMoveOne && end.isEmpty()) || (whiteMoveTwo && inter.isEmpty() && end.isEmpty()) 
 						||(whiteMoveDiagonal && !end.isEmpty() && endSide.equals(Side.BLACK));
 			}
 			else return (whiteMoveTwo && end.isEmpty()) 
@@ -60,7 +64,9 @@ public class Pawn extends Piece
 		{
 			if(start.getPos().getRow() == Constants.BLACK_PAWN_START)
 			{
-				return (blackMoveOne && end.isEmpty()) || (blackMoveTwo && end.isEmpty()) 
+				Position intermediate = new Position(startCol, startRow-1);
+				Square inter = board.getSquare(intermediate);
+				return (blackMoveOne && end.isEmpty()) || (blackMoveTwo && inter.isEmpty() && end.isEmpty()) 
 				||(blackMoveDiagonal && !end.isEmpty() && endSide.equals(Side.WHITE));
 			}
 			else return (blackMoveTwo && end.isEmpty()) 
