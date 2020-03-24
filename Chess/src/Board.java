@@ -97,4 +97,15 @@ public class Board
 	{
 		return getSquare(Position.stringToPos(pos));
 	}
+	
+	/**
+	 * Sets specified square
+	 * @param pos position of square 
+	 * @param sqr the square we are specifying
+	 */
+	public void setSquare(String pos, Square sqr)
+	{
+		Position position = Position.stringToPos(pos);
+		board[position.getRow()-1][position.getCol()-1] = sqr;
+	}
 }
