@@ -184,8 +184,14 @@ class ChessTests
 		//Check that a place that is two knight moves away is not reachable
 		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d5")));
 		
-		//Check that knight cannot move to random spot on board
-		assertFalse(knight.canMove(board, knightSquare , board.getSquare("d7")));
+		//Check that knight cannot move to random spot on board in no man's land
+		String pos = randPos(1, 8, 3, 6);
+		
+		while(pos.equals("c3") || pos.equals("a3"))
+		{
+			pos = randPos(1, 8, 3, 6);
+		}
+		assertFalse(knight.canMove(board, knightSquare , board.getSquare(pos)));
 		
 		//Check that a square that is valid for a knight to move to but has a pawn of the same
 		//side cannot be moved to
@@ -214,7 +220,38 @@ class ChessTests
 		assertFalse(king.canMove(board, square, board.getSquare("e2")));
 		assertFalse(king.canMove(board, square, board.getSquare("c2")));
 		
+		//remove allies from relevant spaces
+		board.setSquare("d2", new Square(new Position(4,2), null));
+		board.setSquare("e1", new Square(new Position(5,1), null));
+		board.setSquare("c1", new Square(new Position(3,1), null));
+		board.setSquare("e2", new Square(new Position(5,2), null));
+		board.setSquare("c2", new Square(new Position(3,2), null));
 		
+		assertTrue(king.canMove(board, square, board.getSquare("d2")));
+		assertTrue(king.canMove(board, square, board.getSquare("e1")));
+		assertTrue(king.canMove(board, square, board.getSquare("c1")));
+		assertTrue(king.canMove(board, square, board.getSquare("e2")));
+		assertTrue(king.canMove(board, square, board.getSquare("c2")));	
+		
+	}
+	
+	/**
+	 * Creates a string that represents a random position on the board
+	 * @param lr lower bound inclusive on the row
+	 * @param ur upper bound inclusive on the row
+	 * @param lc lower bound inclusive on the column
+	 * @param uc upper bound inclusive on the column
+	 * @return
+	 */
+	public String randPos(int lc, int uc, int lr, int ur)
+	{
+		String letter = "";
+		int number = (int)( (Math.random() * (ur+1-lr) ) + lr );
+		int let = (int)( (Math.random() * (uc+1-lc) ) + lc );
+		
+		letter = Character.toString((char) (96 + let));
+		
+		return letter + number;
 	}
 
 }
