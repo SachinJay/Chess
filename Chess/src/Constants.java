@@ -10,4 +10,8 @@ public class Constants
 	//Change in x times change in y position for a knight must always be 2. 
 	//Further, if the change in x times the change in y is 2, the move is a valid knight L
 	public static final int KNIGHT_PRODUCT = 2; 
+	
+	//Start rows for black and white pawns
+	public static final int WHITE_PAWN_START = 2;
+	public static final int BLACK_PAWN_START = 7;
 }
