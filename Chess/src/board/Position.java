@@ -3,6 +3,7 @@
  * @author Sachin Devasahayam
  * Class used to represent the position of a chess piece
  */
+package board;
 public class Position
 {
 	/**The following lines represent the column and line respectively*/

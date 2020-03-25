@@ -4,6 +4,7 @@
  * 
  *
  */
+package pieces;
 public abstract class Piece
 {
 	/**Which side the piece is on*/

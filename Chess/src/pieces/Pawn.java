@@ -3,6 +3,7 @@
  * @author Sachin Devasahayam
  *
  */
+package pieces;
 public class Pawn extends Piece
 {
 

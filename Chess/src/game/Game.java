@@ -1,4 +1,4 @@
-
+package game;
 public class Game
 {
 	private Player[] players;

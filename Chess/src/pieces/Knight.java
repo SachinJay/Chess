@@ -3,6 +3,7 @@
  * @author Sachin Devasahayam
  *
  */
+package pieces;
 public class Knight extends Piece
 {
 

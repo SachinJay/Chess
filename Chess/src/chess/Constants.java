@@ -1,4 +1,4 @@
-
+package chess;
 public class Constants
 {
 	//Max row/col number is 8, min is 1
