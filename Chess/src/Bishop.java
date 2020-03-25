@@ -12,6 +12,11 @@ public class Bishop extends Piece
 	@Override
 	public Boolean canMove(Board board, Square start, Square end)
 	{
+		return canMoveBishoply(board, start, end);		
+	}
+	
+	private Boolean canMoveBishoply(Board board, Square start, Square end)
+	{
 		Position startPos = start.getPos();
 		int rStart = startPos.getRow();
 		int cStart = startPos.getCol();
