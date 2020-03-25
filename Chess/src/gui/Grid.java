@@ -15,6 +15,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import board.Board;
+import board.Position;
+
 public class Grid
 {
 	private final JFrame gameFrame;
@@ -79,11 +82,15 @@ public class Grid
 		{
 			super(new GridLayout(Constants.MAX_POS,Constants.MAX_POS));
 			boardSquares = new ArrayList<>();
-			for(int i = 0; i < Constants.NUM_SQUARES; i++)
+			for(int r = 1; r <= Constants.MAX_POS; r++)
 			{
-				SquarePanel sp = new SquarePanel(this,i);
-				boardSquares.add(sp);
-				add(sp);
+				for(int c = 1; c <= Constants.MAX_POS; c++)
+				{
+					String position = Position.posToStr(c) + r;
+					SquarePanel sp = new SquarePanel(this,position);
+					boardSquares.add(sp);
+					add(sp);
+				}
 			}
 			
 			setPreferredSize(Constants.BOARD_DIM);
@@ -93,33 +100,39 @@ public class Grid
 	
 	private class SquarePanel extends JPanel
 	{
-		private int id;
+		private String pos;
 		
-		SquarePanel(BoardPanel bp, int id)
+		SquarePanel(BoardPanel bp, String pos)
 		{
 			super(new GridBagLayout());
-			this.id = id; 
+			this.pos =pos; 
 			setPreferredSize(Constants.SQUARE_DIM);
 			assignSquareColor();
 			validate();
 		}
+		
+//		private void assignSquarePiece(Board board)
+//		{
+//			this.removeAll();
+//			if(!board.getSquare(this.pos).isEmpty())
+//			{
+//				
+//			}
+//		}
 
 		private void assignSquareColor()
 		{
-			if(isInOddRow(id))
+			int col = Position.stringToPos(this.pos).getCol();
+			int row = Position.stringToPos(this.pos).getRow();
+			
+			if(row % 2 == 0)
 			{
-				setBackground(this.id %2 == 0? Constants.COL_LIGHT : Constants.COL_DARK);
+				setBackground(col %2 == 0? Constants.COL_LIGHT : Constants.COL_DARK);
 			}
 			else
 			{
-				setBackground(this.id %2 == 0? Constants.COL_DARK : Constants.COL_LIGHT);
+				setBackground(col %2 == 0? Constants.COL_DARK : Constants.COL_LIGHT);
 			}
-		}
-
-		private boolean isInOddRow(int id2)
-		{
-			return (id2>=0 && id2<=7)||(id2>=16 && id2<=23)||(id2>=32 && id2<=39)
-					||(id2>=48 && id2<=55);
 		}
 	}
 	

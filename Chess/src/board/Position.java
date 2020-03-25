@@ -85,7 +85,7 @@ public class Position
 	 * @param pos column position to be converted into a letter
 	 * @return the letter corresponding to the entered position
 	 */
-	public String posToStr(int pos)
+	public static String posToStr(int pos)
 	{
 		switch(pos)
 		{
