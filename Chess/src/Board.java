@@ -5,10 +5,10 @@ public class Board
 	
 	public Board()
 	{
-		this.defaultBoard();
+		this.reset();
 	}
 	
-	public void defaultBoard()
+	public void reset()
 	{
 		board = new Square[Constants.MAX_POS][Constants.MAX_POS];
 		//First white row

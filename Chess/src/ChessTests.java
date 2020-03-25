@@ -489,7 +489,7 @@ class ChessTests
 		assertFalse(bishop.canMove(board, square, board.getSquare("h6")));
 		
 		//Test a few invalid spaces after resetting the board
-		board.defaultBoard();
+		board.reset();
 		assertFalse(bishop.canMove(board, square, board.getSquare("c2")));		
 		assertFalse(bishop.canMove(board, square, board.getSquare("b1")));
 		assertFalse(bishop.canMove(board, square, board.getSquare("d1")));
