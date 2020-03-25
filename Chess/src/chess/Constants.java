@@ -1,5 +1,8 @@
 package chess;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
 import pieces.Side;
 
 public class Constants
@@ -20,4 +23,13 @@ public class Constants
 	
 	public static final String DEFAULT_NAME = "Sachin";
 	public static final Side DEFAULT_SIDE = Side.WHITE;
+	
+	public static final Dimension FRAME_DIM = new Dimension(700,700);
+	public static final Dimension BOARD_DIM = new Dimension(500,450);
+	public static final Dimension SQUARE_DIM = new Dimension(12,12);
+	
+	public static final int NUM_SQUARES = MAX_POS * MAX_POS;
+	
+	public static final Color COL_LIGHT = Color.WHITE;
+	public static final Color COL_DARK = Color.BLACK;
 }
