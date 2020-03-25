@@ -163,6 +163,7 @@ class ChessTests
 		assertEquals("a2", a2.getPos().toString());
 		assertEquals("a3", a3.getPos().toString());
 		assertEquals("e1", e1.getPos().toString());
+		assertEquals("h6",board.getSquare("h6").getPos().toString());
 		
 		//Test that the pieces are correct
 		assertEquals("White Rook", a1.getPiece().toString());
@@ -430,6 +431,71 @@ class ChessTests
 			String posBlack = randPos(1,8,1,4);
 			assertFalse(blackPawn.canMove(board, blackSquare, board.getSquare(posBlack)));
 		}
+	}
+	
+	@Test
+	void bishopTests()
+	{
+		//TODO: Checklist
+		//[x]Valid space to move to, but there's an ally there blocking you
+		//[x]Valid space to move to, and its empty
+		//[x]Valid space to move to, and can capture
+		//[x]Valid space to move to but there is an intermediary piece blocking
+		//[]Invalid space to move to
+		
+		Board board = new Board();
+		Square square = board.getSquare("c1");
+		Bishop bishop = (Bishop) square.getPiece();
+		
+		//Valid space (only one away) but ally blocks
+		assertFalse(bishop.canMove(board, square, board.getSquare("b2")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("d2")));
+		
+		//Remove the blocking pawns
+		board.setSquare("b2", new Square(new Position(2,2),null));
+		board.setSquare("d2", new Square(new Position(4,2),null));
+		
+		//Put blocking pawns further away
+		board.setSquare("a3", new Square(new Position(1,3),new Pawn(Side.WHITE)));
+		board.setSquare("h6", new Square(new Position(8,6),new Pawn(Side.WHITE)));
+		
+		//Valid space but ally blocks
+		assertFalse(bishop.canMove(board, square, board.getSquare("a3")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("h6")));
+		
+		//Valid empty space
+		assertTrue(bishop.canMove(board, square, board.getSquare("b2")));
+		assertTrue(bishop.canMove(board, square, board.getSquare("d2")));
+		assertTrue(bishop.canMove(board, square, board.getSquare("e3")));
+		assertTrue(bishop.canMove(board, square, board.getSquare("f4")));
+		assertTrue(bishop.canMove(board, square, board.getSquare("g5")));
+		
+		//Replace allies with enemies, should be able to capture
+		board.setSquare("a3", new Square(new Position(1,3),new Pawn(Side.BLACK)));
+		board.setSquare("h6", new Square(new Position(8,6),new Pawn(Side.BLACK)));
+		
+		assertTrue(bishop.canMove(board, square, board.getSquare("a3")));
+		assertTrue(bishop.canMove(board, square, board.getSquare("h6")));
+		
+		//put back pawns on front line to block legal moves (note what side they are is irrelevant)
+		board.setSquare("b2", new Square(new Position(2,2),new Pawn(Side.BLACK)));
+		board.setSquare("d2", new Square(new Position(4,2),new Pawn(Side.WHITE)));
+		
+		//Can't move to valid square if a piece blocks you
+		assertFalse(bishop.canMove(board, square, board.getSquare("a3")));		
+		assertFalse(bishop.canMove(board, square, board.getSquare("e3")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("f4")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("g5")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("h6")));
+		
+		//Test a few invalid spaces after resetting the board
+		board.defaultBoard();
+		assertFalse(bishop.canMove(board, square, board.getSquare("c2")));		
+		assertFalse(bishop.canMove(board, square, board.getSquare("b1")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("d1")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("c1")));
+		assertFalse(bishop.canMove(board, square, board.getSquare("h7")));
+			
 	}
 	
 	/**

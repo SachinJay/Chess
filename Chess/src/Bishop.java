@@ -20,10 +20,15 @@ public class Bishop extends Piece
 		int rEnd = endPos.getRow();
 		int cEnd = endPos.getCol();
 		
-		int changeInR = rStart-rEnd;
-		int changeInC = cStart - cEnd;
+		int changeInR = rEnd-rStart;
+		int changeInC = cEnd -cStart;
 		
 		Boolean pathIsDiagonal = Math.abs(changeInR) == Math.abs(changeInC);
+		
+		if(!pathIsDiagonal)
+			{
+				return false;
+			}
 		
 		Boolean rForwards = changeInR >= 0;
 		Boolean cForwards = changeInC >= 0;
@@ -31,13 +36,20 @@ public class Bishop extends Piece
 		int rInc = rForwards? 1 : -1;
 		int cInc = cForwards? 1 : -1;
 		
+		//TODO change from add/sub Inc's into just plus 1 because that's all this is
+		int rBegIndex = rForwards? rStart + rInc : rEnd - rInc;
+		int cBegIndex = cForwards? cStart + cInc: cEnd - cInc;
+		
+		int rBound = rForwards? rEnd : rStart;
+		int cBound = cForwards? cEnd : cStart;
+		
 		//Check that there is nothing on the path
-		for(int r = rStart + rInc; r < rEnd; r += rInc)
+		for(int r = rBegIndex; r < rBound; r++)
 		{
-			for(int c = cStart + cInc; c < cEnd; c +=cInc)
+			for(int c = cBegIndex; c < cBound; c++)
 			{
 				//I.e. if along the diagonal
-				if(Math.abs(r-rStart) == Math.abs(c-cStart))
+				if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
 				{
 					Position curPos = new Position(c,r);
 					if(!board.getSquare(curPos).isEmpty())
