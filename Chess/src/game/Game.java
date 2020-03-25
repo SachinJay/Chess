@@ -13,7 +13,7 @@ public class Game
 	{
 		players[0] = new Player();
 		players[1] = new Player();
-		board = new Board();
+		setBoard(new Board());
 		setStatus(Status.IN_PLAY);
 		setTurn(players[0]);
 	}
@@ -22,7 +22,7 @@ public class Game
 	{
 		players[0] = p1;
 		players[1] = p2;
-		board = new Board();
+		setBoard(new Board());
 		setStatus(Status.IN_PLAY);
 		setTurn(players[0]);
 	}
@@ -57,6 +57,22 @@ public class Game
 	public void setTurn(Player turn)
 	{
 		this.turn = turn;
+	}
+
+	/**
+	 * @return the board
+	 */
+	public Board getBoard()
+	{
+		return board;
+	}
+
+	/**
+	 * @param board the board to set
+	 */
+	public void setBoard(Board board)
+	{
+		this.board = board;
 	}
 	
 	
