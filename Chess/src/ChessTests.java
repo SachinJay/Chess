@@ -276,6 +276,7 @@ class ChessTests
 		//[x]Valid space to move to, and can capture
 		//[x]Invalid space to move to (for example, space you start at)
 		//[x]Otherwise all good except that there is a piece on the rook's path
+		//[] Backwards
 		
 		Board board = new Board();
 		Square square = board.getSquare("a1");
@@ -353,6 +354,16 @@ class ChessTests
 		assertFalse(rook.canMove(board, square, board.getSquare("a7")));
 		assertFalse(rook.canMove(board, square, board.getSquare("h1")));
 		
+		//Backwards tests, requires a new rook
+		board.setSquare("d4",new Square(new Position(4,4),new Rook(Side.BLACK)));
+		Square square2 = board.getSquare("d4");
+		Rook rook2 = (Rook) square2.getPiece();
+		
+		//All directions of movement
+		assertTrue(rook2.canMove(board, square2, board.getSquare("d3")));
+		assertTrue(rook2.canMove(board, square2, board.getSquare("d5")));
+		assertTrue(rook2.canMove(board, square2, board.getSquare("c4")));
+		assertTrue(rook2.canMove(board, square2, board.getSquare("e4")));
 		
 	}
 	
