@@ -4,6 +4,12 @@
  *
  */
 package pieces;
+
+import board.Board;
+import board.Position;
+import board.Square;
+import chess.Constants;
+
 public class Pawn extends Piece
 {
 

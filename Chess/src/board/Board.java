@@ -1,5 +1,8 @@
 package board;
 
+import chess.Constants;
+import pieces.*;
+
 public class Board
 {
 	private Square[][] board;

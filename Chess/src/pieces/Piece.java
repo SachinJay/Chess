@@ -5,6 +5,10 @@
  *
  */
 package pieces;
+
+import board.Board;
+import board.Square;
+
 public abstract class Piece
 {
 	/**Which side the piece is on*/

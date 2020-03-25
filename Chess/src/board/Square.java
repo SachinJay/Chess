@@ -1,6 +1,8 @@
 package board;
 import java.util.Optional;
 
+import pieces.Piece;
+
 /**
  * 
  * @author Sachin Devasahayam

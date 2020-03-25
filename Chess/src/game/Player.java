@@ -1,4 +1,8 @@
 package game;
+
+import chess.Constants;
+import pieces.Side;
+
 public class Player
 {
 	private String name;

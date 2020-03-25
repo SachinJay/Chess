@@ -1,4 +1,8 @@
 package pieces;
+
+import board.Board;
+import board.Square;
+
 public class King extends Piece
 {
 

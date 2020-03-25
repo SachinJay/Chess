@@ -4,6 +4,11 @@
  *
  */
 package pieces;
+
+import board.Board;
+import board.Square;
+import chess.Constants;
+
 public class Knight extends Piece
 {
 

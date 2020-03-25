@@ -4,6 +4,9 @@
  * Class used to represent the position of a chess piece
  */
 package board;
+
+import chess.Constants;
+
 public class Position
 {
 	/**The following lines represent the column and line respectively*/

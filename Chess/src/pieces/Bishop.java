@@ -1,4 +1,9 @@
 package pieces;
+
+import board.Board;
+import board.Position;
+import board.Square;
+
 public class Bishop extends Piece
 {
 
