@@ -105,6 +105,7 @@ public class Board
 	 */
 	public void setSquare(String pos, Square sqr)
 	{
+		assert(pos.equals(sqr.getPos().toString()));
 		Position position = Position.stringToPos(pos);
 		board[position.getRow()-1][position.getCol()-1] = sqr;
 	}
