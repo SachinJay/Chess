@@ -14,4 +14,7 @@ public class Constants
 	//Start rows for black and white pawns
 	public static final int WHITE_PAWN_START = 2;
 	public static final int BLACK_PAWN_START = 7;
+	
+	public static final String DEFAULT_NAME = "Sachin";
+	public static final Side DEFAULT_SIDE = Side.WHITE;
 }
