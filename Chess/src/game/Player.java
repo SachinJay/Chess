@@ -10,13 +10,45 @@ public class Player
 	
 	public Player()
 	{
-		this.name = Constants.DEFAULT_NAME;
-		this.side = Constants.DEFAULT_SIDE;
+		this.setName(Constants.DEFAULT_NAME);
+		this.setSide(Constants.DEFAULT_SIDE);
 	}
 	
 	public Player(String name, Side side)
 	{
-		this.name = name; 
+		this.setName(name); 
+		this.setSide(side);
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName()
+	{
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	/**
+	 * @return the side
+	 */
+	public Side getSide()
+	{
+		return side;
+	}
+
+	/**
+	 * @param side the side to set
+	 */
+	public void setSide(Side side)
+	{
 		this.side = side;
 	}
 
