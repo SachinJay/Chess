@@ -32,6 +32,6 @@ public class Constants
 	//Did not use black and white because the black pieces did not show up
 	public static final Color COL_LIGHT = new Color(255, 241, 220);
 	public static final Color COL_DARK = new Color(182,148,110);
-	public static final String FILE_PATH = "C:\\Users\\sachi\\Pictures\\";
+	public static final String FILE_PATH = "src/images/";
 	public static final String FILE_SUFFIX = ".png";
 }
