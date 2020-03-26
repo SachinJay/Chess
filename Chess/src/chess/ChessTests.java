@@ -129,6 +129,21 @@ class ChessTests
 		assertTrue(board.getSquare("a2").isEmpty());
 		assertNull(piece);
 		
+		Square start2 = board.getSquare("d7");
+		Pawn pawn3 = (Pawn) start2.getPiece();
+		Square end2 = board.getSquare("d5");
+		pawn3.move(board, start2, end2);
+		
+		Square start3 = board.getSquare("e8");
+		Queen queen = (Queen) start3.getPiece();
+		Square end3 = board.getSquare("a4");
+		Piece capturedPawn = queen.move(board, start3, end3);
+		
+		assertNotNull(capturedPawn);
+		assertEquals("White Pawn",capturedPawn.toString());
+		
+		board.print();
+		
 	}
 	
 	@Test

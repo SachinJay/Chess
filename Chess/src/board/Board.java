@@ -116,4 +116,36 @@ public class Board
 		Position position = Position.stringToPos(pos);
 		board[position.getRow()-1][position.getCol()-1] = sqr;
 	}
+	
+	/**
+	 * Rudimentary print function that prints out the board so that I can check everything is good
+	 */
+	public void print()
+	{
+		for(int r = 7; r >= 0; r--)
+		{
+			for(int c = 0; c <= 7; c++)
+			{
+				Square curSquare = this.board[r][c]; 
+				if(curSquare.isEmpty())
+				{
+					System.out.print("-" + " ");
+				}
+				else
+				{
+					Character letter = curSquare.getPiece().toString().split("\\s")[1].charAt(0);
+					String let = letter.toString();
+					if(curSquare.getPiece().getSide().equals(Side.BLACK))
+					{
+						System.out.print(let+" ");					
+					}
+					else
+					{
+						System.out.print(let.toLowerCase() + " ");
+					}
+				}
+			}
+			System.out.println();
+		}
+	}
 }
