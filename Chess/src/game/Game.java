@@ -4,27 +4,30 @@ import board.Board;
 
 public class Game
 {
-	private Player[] players;
+	private Player[] players = new Player[2];
 	private Board board; 
 	private Status status;
 	private Player turn;
+	private int turnInd;
 	
-	Game()
+	public Game()
 	{
 		players[0] = new Player();
 		players[1] = new Player();
 		setBoard(new Board());
 		setStatus(Status.IN_PLAY);
-		setTurn(players[0]);
+		turnInd = 0;
+		setTurn(players[turnInd]);
 	}
 	
-	Game(Player p1, Player p2)
+	public Game(Player p1, Player p2)
 	{
 		players[0] = p1;
 		players[1] = p2;
 		setBoard(new Board());
 		setStatus(Status.IN_PLAY);
-		setTurn(players[0]);
+		turnInd = 0;
+		setTurn(players[turnInd]);
 	}
 
 	/**
@@ -73,6 +76,14 @@ public class Game
 	public void setBoard(Board board)
 	{
 		this.board = board;
+	}
+	
+	/**
+	 * Toggles turn
+	 */
+	public void changeTurn()
+	{
+		this.turn = this.players[1-this.turnInd];
 	}
 	
 	
