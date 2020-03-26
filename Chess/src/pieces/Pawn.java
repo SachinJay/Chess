@@ -64,7 +64,7 @@ public class Pawn extends Piece
 				return (whiteMoveOne && end.isEmpty()) || (whiteMoveTwo && inter.isEmpty() && end.isEmpty()) 
 						||(whiteMoveDiagonal && !end.isEmpty() && endSide.equals(Side.BLACK));
 			}
-			else return (whiteMoveTwo && end.isEmpty()) 
+			else return (whiteMoveOne && end.isEmpty()) 
 					||(whiteMoveDiagonal && !end.isEmpty() && endSide.equals(Side.BLACK));
 		}
 		else
@@ -76,7 +76,7 @@ public class Pawn extends Piece
 				return (blackMoveOne && end.isEmpty()) || (blackMoveTwo && inter.isEmpty() && end.isEmpty()) 
 				||(blackMoveDiagonal && !end.isEmpty() && endSide.equals(Side.WHITE));
 			}
-			else return (blackMoveTwo && end.isEmpty()) 
+			else return (blackMoveOne && end.isEmpty()) 
 					||(blackMoveDiagonal && !end.isEmpty() && endSide.equals(Side.WHITE));
 		}
 		
