@@ -91,9 +91,9 @@ public class Grid
 		{
 			super(new GridLayout(Constants.MAX_POS,Constants.MAX_POS));
 			boardSquares = new ArrayList<>();
-			for(int r = 1; r <= Constants.MAX_POS; r++)
+			for(int r = 8; r >= Constants.MIN_POS; r--)
 			{
-				for(int c = 1; c <= Constants.MAX_POS; c++)
+				for(int c = 8; c >= Constants.MIN_POS; c--)
 				{
 					String position = Position.posToStr(c) + r;
 					SquarePanel sp = new SquarePanel(this,position);
