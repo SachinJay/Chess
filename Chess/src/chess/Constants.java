@@ -28,6 +28,10 @@ public class Constants
 	public static final Dimension BOARD_DIM = new Dimension(500,450);
 	public static final Dimension SQUARE_DIM = new Dimension(12,12);
 	
-	public static final Color COL_LIGHT = Color.WHITE;
-	public static final Color COL_DARK = Color.BLACK;
+	//Colors for light and dark squares, found using an online color picker on a board
+	//Did not use black and white because the black pieces did not show up
+	public static final Color COL_LIGHT = new Color(255, 241, 220);
+	public static final Color COL_DARK = new Color(182,148,110);
+	public static final String FILE_PATH = "C:\\Users\\sachi\\Pictures\\";
+	public static final String FILE_SUFFIX = ".png";
 }

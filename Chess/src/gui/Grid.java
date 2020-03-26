@@ -1,15 +1,22 @@
 package gui;
 import chess.Constants;
+import pieces.Piece;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -22,14 +29,16 @@ public class Grid
 {
 	private final JFrame gameFrame;
 	private final BoardPanel boardPanel;
+	private final Board chessBoard;
 	
-	public Grid()
+	public Grid() throws IOException
 	{
 		this.gameFrame = new JFrame("Chess Frame");
 		this.gameFrame.setLayout(new BorderLayout());
 		final JMenuBar menuBar= new JMenuBar();
 		addToMenuBar(menuBar);
 		this.gameFrame.setJMenuBar(menuBar);
+		this.chessBoard = new Board();
 		
 		
 		this.gameFrame.setSize(Constants.FRAME_DIM);
@@ -78,7 +87,7 @@ public class Grid
 	{
 		final List<SquarePanel> boardSquares;
 		
-		BoardPanel()
+		BoardPanel() throws IOException
 		{
 			super(new GridLayout(Constants.MAX_POS,Constants.MAX_POS));
 			boardSquares = new ArrayList<>();
@@ -102,23 +111,29 @@ public class Grid
 	{
 		private String pos;
 		
-		SquarePanel(BoardPanel bp, String pos)
+		SquarePanel(BoardPanel bp, String pos) throws IOException
 		{
 			super(new GridBagLayout());
 			this.pos =pos; 
 			setPreferredSize(Constants.SQUARE_DIM);
 			assignSquareColor();
+			assignSquarePiecePic(chessBoard);
 			validate();
 		}
 		
-//		private void assignSquarePiece(Board board)
-//		{
-//			this.removeAll();
-//			if(!board.getSquare(this.pos).isEmpty())
-//			{
-//				
-//			}
-//		}
+		private void assignSquarePiecePic(Board board) throws IOException
+		{
+			this.removeAll();
+			if(!board.getSquare(this.pos).isEmpty())
+			{
+				Piece piece = board.getSquare(this.pos).getPiece();
+				String fileName =
+						Constants.FILE_PATH + piece.toString().replaceAll("\\s", "") + Constants.FILE_SUFFIX;
+				File file = new File(fileName);
+				BufferedImage img = ImageIO.read(file);
+				add(new JLabel(new ImageIcon(img)));
+			}
+		}
 
 		private void assignSquareColor()
 		{
