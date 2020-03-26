@@ -144,6 +144,11 @@ class ChessTests
 		
 		board.print();
 		
+		//Test to see the valid moves for an arbitrary pawn
+		Square start4 = board.getSquare("b2");
+		Pawn pawn4 = (Pawn) start4.getPiece();
+		assertEquals(2,pawn4.legalMoves(board, start4).size());
+		
 	}
 	
 	@Test
