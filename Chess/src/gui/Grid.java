@@ -132,6 +132,13 @@ public class Grid
 	{
 		private String pos;
 		
+		private void reset()
+		{
+			start = null; 
+			end = null; 
+			curPiece = null;
+		}
+		
 		SquarePanel(BoardPanel bp, String pos) throws IOException
 		{
 			super(new GridBagLayout());
@@ -177,9 +184,7 @@ public class Grid
 					//Right click cancels any selections 
 					if(SwingUtilities.isRightMouseButton(e))
 					{
-						start = null; 
-						end = null;
-						curPiece = null;
+						reset();
 					}
 					else if(SwingUtilities.isLeftMouseButton(e))
 					{
@@ -195,9 +200,7 @@ public class Grid
 							end = chessBoard.getSquare(pos);
 							curPiece.move(chessBoard, start, end);
 							//TODO add move to list of moves
-							start = null;
-							end = null; 
-							curPiece = null;
+							reset();
 						}					
 						
 						SwingUtilities.invokeLater(new Runnable()
