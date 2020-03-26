@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,21 +23,26 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import board.Board;
 import board.Position;
+import board.Square;
 
 public class Grid
 {
-	private final JFrame gameFrame;
-	private final BoardPanel boardPanel;
-	private final Board chessBoard;
+	private JFrame gameFrame;
+	private BoardPanel boardPanel;
+	private Board chessBoard;
+	private Square start;
+	private Square end;
+	private Piece curPiece;
 	
 	public Grid() throws IOException
 	{
 		this.gameFrame = new JFrame("Chess Frame");
 		this.gameFrame.setLayout(new BorderLayout());
-		final JMenuBar menuBar= new JMenuBar();
+		JMenuBar menuBar= new JMenuBar();
 		addToMenuBar(menuBar);
 		this.gameFrame.setJMenuBar(menuBar);
 		this.chessBoard = new Board();
@@ -54,8 +61,8 @@ public class Grid
 
 	private JMenu createFileMenu()
 	{
-		final JMenu fileMenu = new JMenu("File");
-		final JMenuItem item1 = new JMenuItem("Press me to see what I do");
+		JMenu fileMenu = new JMenu("File");
+		JMenuItem item1 = new JMenuItem("Press me to see what I do");
 		item1.addActionListener(new ActionListener()
 		{
 			
@@ -66,7 +73,7 @@ public class Grid
 			}
 		});
 		
-		final JMenuItem exit = new JMenuItem("Exit");
+		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ActionListener()
 		{
 			
@@ -85,7 +92,7 @@ public class Grid
 	
 	private class BoardPanel extends JPanel
 	{
-		final List<SquarePanel> boardSquares;
+		List<SquarePanel> boardSquares;
 		
 		BoardPanel() throws IOException
 		{
@@ -93,7 +100,7 @@ public class Grid
 			boardSquares = new ArrayList<>();
 			for(int r = 8; r >= Constants.MIN_POS; r--)
 			{
-				for(int c = 8; c >= Constants.MIN_POS; c--)
+				for(int c = 1; c <= Constants.MAX_POS; c++)
 				{
 					String position = Position.posToStr(c) + r;
 					SquarePanel sp = new SquarePanel(this,position);
@@ -104,6 +111,20 @@ public class Grid
 			
 			setPreferredSize(Constants.BOARD_DIM);
 			validate();
+		}
+		
+		//Like repaint
+		public void drawBoard(Board board) throws IOException
+		{
+			removeAll();
+			for(SquarePanel sqr : boardSquares)
+			{
+				sqr.drawSquare(board);
+				add(sqr);
+			}
+			
+			validate();
+			repaint();
 		}
 	}
 	
@@ -118,7 +139,99 @@ public class Grid
 			setPreferredSize(Constants.SQUARE_DIM);
 			assignSquareColor();
 			assignSquarePiecePic(chessBoard);
+			
+			addMouseListener(new MouseListener()
+			{
+				
+				@Override
+				public void mouseReleased(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e)
+				{
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e)
+				{
+					//Right click cancels any selections 
+					if(SwingUtilities.isRightMouseButton(e))
+					{
+						start = null; 
+						end = null;
+						curPiece = null;
+					}
+					else if(SwingUtilities.isLeftMouseButton(e))
+					{
+						//First click
+						if(start == null)
+						{
+							start = chessBoard.getSquare(pos).isEmpty()? null: chessBoard.getSquare(pos);
+							curPiece = start == null ? null : start.getPiece();
+						}
+						//second click, should move after this
+						else
+						{
+							end = chessBoard.getSquare(pos);
+							curPiece.move(chessBoard, start, end);
+							//TODO add move to list of moves
+							start = null;
+							end = null; 
+							curPiece = null;
+						}					
+						
+						SwingUtilities.invokeLater(new Runnable()
+						{
+							
+							@Override
+							public void run()
+							{
+								try
+								{
+									bp.drawBoard(chessBoard);
+								} catch (IOException e)
+								{
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								
+							}
+						});
+						
+					}
+					
+				}
+			});
+			
 			validate();
+		}
+		
+		public void drawSquare(Board board) throws IOException
+		{
+			assignSquareColor();
+			assignSquarePiecePic(board);
+			validate();
+			repaint();
 		}
 		
 		private void assignSquarePiecePic(Board board) throws IOException
