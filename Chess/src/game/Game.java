@@ -83,7 +83,8 @@ public class Game
 	 */
 	public void changeTurn()
 	{
-		this.turn = this.players[1-this.turnInd];
+		this.turnInd = 1-this.turnInd;
+		this.turn = this.players[this.turnInd];
 	}
 	
 	

@@ -1,6 +1,9 @@
 package gui;
 import chess.Constants;
+import game.Game;
+import game.Player;
 import pieces.Piece;
+import pieces.Side;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
@@ -37,9 +40,16 @@ public class Grid
 	private Square start;
 	private Square end;
 	private Piece curPiece;
+	private Game game; 
+	private Player p1;
+	private Player p2;
 	
 	public Grid() throws IOException
 	{
+		p1 = new Player("Sachin", Side.WHITE);
+		p2 = new Player("Beep",Side.BLACK);
+		
+		game = new Game(p1,p2);
 		this.gameFrame = new JFrame("Chess Frame");
 		this.gameFrame.setLayout(new BorderLayout());
 		JMenuBar menuBar= new JMenuBar();
@@ -193,6 +203,14 @@ public class Grid
 						{
 							start = chessBoard.getSquare(pos).isEmpty()? null: chessBoard.getSquare(pos);
 							curPiece = start == null ? null : start.getPiece();
+							if(curPiece != null)
+							{
+								if(!(curPiece.getSide() == game.getTurn().getSide()))
+								{
+									start = null; 
+									curPiece = null;
+								}
+							}
 						}
 						//second click, should move after this
 						else
@@ -201,6 +219,7 @@ public class Grid
 							curPiece.move(chessBoard, start, end);
 							//TODO add move to list of moves
 							reset();
+							game.changeTurn();
 						}					
 						
 						SwingUtilities.invokeLater(new Runnable()
