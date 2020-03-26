@@ -6,6 +6,9 @@
  */
 package pieces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import board.Board;
 import board.Position;
 import board.Square;
@@ -47,6 +50,31 @@ public abstract class Piece
 		{
 			return null;
 		}
+	}
+	
+	/**
+	 * Returns all valid moves
+	 * @param board the relevant board
+	 * @param start the Square the current piece is located on
+	 * @return all Squares such that this piece can move to that square
+	 */
+	public ArrayList<Square> legalMoves(Board board, Square start)
+	{
+		ArrayList<Square> validEndSquares = new ArrayList<>();
+		Square[][] chessBoard = board.getBoard();
+		
+		for(Square[] sqrArr : chessBoard)
+		{
+			for(Square sqr : sqrArr)
+			{
+				if(this.canMove(board, start, sqr))
+				{
+					validEndSquares.add(sqr);
+				}
+			}
+		}
+		
+		return validEndSquares;
 	}
 
 	/**
