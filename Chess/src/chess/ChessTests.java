@@ -116,6 +116,19 @@ class ChessTests
 		assertEquals(Side.BLACK, knight.getSide());
 		knight.setSide(Side.WHITE); //change knight color to white
 		assertEquals(Side.WHITE, knight.getSide());
+		
+		//Test the move method works
+		Board board = new Board();
+		Square start = board.getSquare("a2");
+		Pawn pawn2 = (Pawn) start.getPiece();
+		Square end = board.getSquare("a4");
+		assertTrue(end.isEmpty());
+		Piece piece = pawn2.move(board, start, end);
+		assertFalse(end.isEmpty());
+		assertEquals("White Pawn",board.getSquare("a4").getPiece().toString());
+		assertTrue(board.getSquare("a2").isEmpty());
+		assertNull(piece);
+		
 	}
 	
 	@Test

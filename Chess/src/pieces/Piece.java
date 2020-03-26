@@ -7,6 +7,7 @@
 package pieces;
 
 import board.Board;
+import board.Position;
 import board.Square;
 
 public abstract class Piece
@@ -22,6 +23,31 @@ public abstract class Piece
 	}
 	
 	public abstract Boolean canMove(Board board, Square start, Square end);
+	
+	/**
+	 * Moves piece from start to end
+	 * @param board the current game board
+	 * @param start the start square where the moving piece is
+	 * @param end the end square where our piece will move to
+	 * @return the captured piece, null if moving to empty square or if the move was invalid
+	 */
+	public Piece move(Board board, Square start, Square end)
+	{
+		if(this.canMove(board, start, end))
+		{
+			Piece p = end.isEmpty() ? null: end.getPiece();
+			
+			Piece curPiece = start.getPiece();
+			end.setPiece(curPiece);
+			start.setPiece(null);
+			
+			return p;
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	/**
 	 * @return the side
