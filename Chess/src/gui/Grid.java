@@ -216,10 +216,11 @@ public class Grid
 						else
 						{
 							end = chessBoard.getSquare(pos);
+							Boolean changeTurn = curPiece.canMove(chessBoard, start, end);
 							curPiece.move(chessBoard, start, end);
 							//TODO add move to list of moves
 							reset();
-							game.changeTurn();
+							if(changeTurn) game.changeTurn();
 						}					
 						
 						SwingUtilities.invokeLater(new Runnable()
@@ -252,6 +253,7 @@ public class Grid
 		{
 			assignSquareColor();
 			assignSquarePiecePic(board);
+			markLegalSquares(board);
 			validate();
 			repaint();
 		}
@@ -263,7 +265,7 @@ public class Grid
 			{
 				Piece piece = board.getSquare(this.pos).getPiece();
 				String fileName =
-						Constants.FILE_PATH + piece.toString().replaceAll("\\s", "") + Constants.FILE_SUFFIX;
+						Constants.IMAGES_PATH + piece.toString().replaceAll("\\s", "") + Constants.IMG_SUFFIX;
 				File file = new File(fileName);
 				BufferedImage img = ImageIO.read(file);
 				add(new JLabel(new ImageIcon(img)));
@@ -283,6 +285,44 @@ public class Grid
 			{
 				setBackground(col %2 == 0? Constants.COL_DARK : Constants.COL_LIGHT);
 			}
+		}
+		
+		private void markLegalSquares(Board board)
+		{
+			//Replace true with a predicate relating to preferences in menu bar
+			if(true)
+			{
+				File file = new File(Constants.IMAGES_PATH + "Dot.jpg");
+				for(Square sqr : legalSquares(board))
+				{
+					String curPos = Position.posToStr(sqr.getPos().getCol()) + sqr.getPos().getRow();
+					if(this.pos.equals(curPos))
+					{
+						try
+						{
+							add(new JLabel(new ImageIcon(ImageIO.read(file))));
+						} catch (IOException e)
+						{
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
+		/**
+		 * Returns legal moves for the current player 
+		 * @param board the board in question
+		 * @return legal squares one can move to
+		 */
+		private ArrayList<Square> legalSquares(Board board)
+		{
+			if(curPiece != null && curPiece.getSide().equals(game.getTurn().getSide()))
+			{
+				return curPiece.legalMoves(board, start);
+			}
+			else return new ArrayList<>();
 		}
 	}
 	
