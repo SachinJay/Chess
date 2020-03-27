@@ -43,9 +43,12 @@ public class Grid
 	private Game game; 
 	private Player p1;
 	private Player p2;
+	private Boolean showLegalMoves;
 	
 	public Grid() throws IOException
 	{
+		showLegalMoves = false;
+		
 		p1 = new Player("Sachin", Side.WHITE);
 		p2 = new Player("Beep",Side.BLACK);
 		
@@ -67,6 +70,7 @@ public class Grid
 	private void addToMenuBar(JMenuBar menuBar)
 	{
 		menuBar.add(createFileMenu());
+		menuBar.add(createPreferencesMenu());
 	}
 
 	private JMenu createFileMenu()
@@ -98,6 +102,25 @@ public class Grid
 		fileMenu.add(item1);
 		fileMenu.add(exit);
 		return fileMenu;
+	}
+	
+	private JMenu createPreferencesMenu()
+	{
+		JMenu prefMenu = new JMenu("Preferences");
+		JMenuItem moves = new JMenuItem("Show Legal Moves");
+		moves.addActionListener(new ActionListener()
+		{
+			
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				showLegalMoves = !showLegalMoves;				
+			}
+		});
+		
+		prefMenu.add(moves);
+		
+		return prefMenu;
 	}
 	
 	private class BoardPanel extends JPanel
@@ -290,7 +313,7 @@ public class Grid
 		private void markLegalSquares(Board board)
 		{
 			//Replace true with a predicate relating to preferences in menu bar
-			if(true)
+			if(showLegalMoves)
 			{
 				File file = new File(Constants.IMAGES_PATH + Constants.DOT_NAME);
 				for(Square sqr : legalSquares(board))
