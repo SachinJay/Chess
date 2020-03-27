@@ -98,22 +98,21 @@ public class Game
 	 */
 	private Status calcStatus()
 	{
-		//TODO implement
-		if(this.isInCheck(Side.WHITE))
-		{
-			return Status.WHITE_IS_IN_CHECK;
-		}
-		else if(this.isInCheck(Side.BLACK))
-		{
-			return Status.BLACK_IS_IN_CHECK;
-		}
-		else if(this.sideWon(Side.BLACK))
+		if(this.sideWon(Side.BLACK))
 		{
 			return Status.BLACK_WIN;
 		}
 		else if(this.sideWon(Side.WHITE))
 		{
 			return Status.WHITE_WIN;
+		}
+		else if(this.isInCheck(Side.WHITE))
+		{
+			return Status.WHITE_IS_IN_CHECK;
+		}
+		else if(this.isInCheck(Side.BLACK))
+		{
+			return Status.BLACK_IS_IN_CHECK;
 		}
 		else
 		{

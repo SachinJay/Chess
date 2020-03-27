@@ -332,11 +332,11 @@ public class Grid
 			
 			if(row % 2 == 0)
 			{
-				setBackground(col %2 == 0? Constants.COL_LIGHT : Constants.COL_DARK);
+				setBackground(col %2 != 0? Constants.COL_LIGHT : Constants.COL_DARK);
 			}
 			else
 			{
-				setBackground(col %2 == 0? Constants.COL_DARK : Constants.COL_LIGHT);
+				setBackground(col %2 != 0? Constants.COL_DARK : Constants.COL_LIGHT);
 			}
 		}
 		
