@@ -22,10 +22,10 @@ public class Board
 		board[0][1] = new Square(new Position(2,1), new Knight(Side.WHITE));
 		board[0][2] = new Square(new Position(3,1), new Bishop(Side.WHITE));
 		
-		whiteKingSquare = new Square(new Position(4,1), new King(Side.WHITE));
-		board[0][3] = whiteKingSquare;
+		whiteKingSquare = new Square(new Position(5,1), new King(Side.WHITE));
+		board[0][4] = whiteKingSquare;
 		
-		board[0][4] = new Square(new Position(5,1), new Queen(Side.WHITE));
+		board[0][3] = new Square(new Position(4,1), new Queen(Side.WHITE));
 		board[0][5] = new Square(new Position(6,1), new Bishop(Side.WHITE));
 		board[0][6] = new Square(new Position(7,1), new Knight(Side.WHITE));
 		board[0][7] = new Square(new Position(8,1), new Rook(Side.WHITE));
@@ -45,10 +45,10 @@ public class Board
 		board[7][1] = new Square(new Position(2,8), new Knight(Side.BLACK));
 		board[7][2] = new Square(new Position(3,8), new Bishop(Side.BLACK));
 		
-		blackKingSquare =new Square(new Position(4,8), new King(Side.BLACK)); 
-		board[7][3] = blackKingSquare;
+		blackKingSquare =new Square(new Position(5,8), new King(Side.BLACK)); 
+		board[7][4] = blackKingSquare;
 		
-		board[7][4] = new Square(new Position(5,8), new Queen(Side.BLACK));
+		board[7][3] = new Square(new Position(4,8), new Queen(Side.BLACK));
 		board[7][5] = new Square(new Position(6,8), new Bishop(Side.BLACK));
 		board[7][6] = new Square(new Position(7,8), new Knight(Side.BLACK));
 		board[7][7] = new Square(new Position(8,8), new Rook(Side.BLACK));

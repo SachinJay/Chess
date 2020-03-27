@@ -134,10 +134,14 @@ class ChessTests
 		Square end2 = board.getSquare("d5");
 		pawn3.move(board, start2, end2);
 		
+		System.out.println("yoohoo");
+		board.print();
+		System.out.println();
+		
 		Square start3 = board.getSquare("e8");
-		Queen queen = (Queen) start3.getPiece();
+		King king = (King) start3.getPiece();
 		Square end3 = board.getSquare("a4");
-		Piece capturedPawn = queen.move(board, start3, end3);
+		Piece capturedPawn = king.overrideMove(board, start3, end3);
 		
 		assertNotNull(capturedPawn);
 		assertEquals("White Pawn",capturedPawn.toString());
@@ -205,19 +209,19 @@ class ChessTests
 		//Test that the pieces are correct
 		assertEquals("White Rook", a1.getPiece().toString());
 		assertEquals("White Pawn", a2.getPiece().toString());
-		assertEquals("White Queen", e1.getPiece().toString());
+		assertEquals("White King", e1.getPiece().toString());
 		
 		//Test that king positions update properly
-		assertEquals("d1", board.getKingPos(Side.WHITE).getPos().toString());
-		assertEquals("d8", board.getKingPos(Side.BLACK).getPos().toString());
+		assertEquals("e1", board.getKingPos(Side.WHITE).getPos().toString());
+		assertEquals("e8", board.getKingPos(Side.BLACK).getPos().toString());
 		
-		Square blank1 = new Square(new Position(4,2),null);
-		Square blank2 = new Square(new Position(4,7),null);
-		board.setSquare("d2", blank1);
-		board.setSquare("d7", blank2);
+		Square blank1 = new Square(new Position(5,2),null);
+		Square blank2 = new Square(new Position(5,7),null);
+		board.setSquare("e2", blank1);
+		board.setSquare("e7", blank2);
 		
-		Square wStart  = board.getSquare("d1");
-		Square bStart = board.getSquare("d8");
+		Square wStart  = board.getSquare("e1");
+		Square bStart = board.getSquare("e8");
 		
 		King whiteKing = (King)wStart.getPiece();
 		King blackKing = (King) bStart.getPiece();
@@ -225,8 +229,8 @@ class ChessTests
 		whiteKing.move(board, wStart, blank1);
 		blackKing.move(board, bStart, blank2);
 		
-		assertEquals("d2", board.getKingPos(Side.WHITE).getPos().toString());
-		assertEquals("d7", board.getKingPos(Side.BLACK).getPos().toString());
+		assertEquals("e2", board.getKingPos(Side.WHITE).getPos().toString());
+		assertEquals("e7", board.getKingPos(Side.BLACK).getPos().toString());
 	}
 	
 	@Test
@@ -276,52 +280,51 @@ class ChessTests
 		//Invalid space to move to (for example, space you start at)
 		
 		Board board = new Board();
-		Square square = board.getSquare("d1");
+		Square square = board.getSquare("e1");
 		King king = (King) square.getPiece();
 		
 		//Space to move but white piece is blocking
-		assertFalse(king.canMove(board, square, board.getSquare("d2")));
+		assertFalse(king.canMove(board, square, board.getSquare("d1")));
 		assertFalse(king.canMove(board, square, board.getSquare("e1")));
-		assertFalse(king.canMove(board, square, board.getSquare("c1")));
+		assertFalse(king.canMove(board, square, board.getSquare("f1")));
+		assertFalse(king.canMove(board, square, board.getSquare("d2")));
 		assertFalse(king.canMove(board, square, board.getSquare("e2")));
-		assertFalse(king.canMove(board, square, board.getSquare("c2")));
+		assertFalse(king.canMove(board, square, board.getSquare("f2")));
 		
 		//remove allies from relevant spaces
+		board.setSquare("d1", new Square(new Position(4,1), null));
+		board.setSquare("f1", new Square(new Position(6,1), null));
 		board.setSquare("d2", new Square(new Position(4,2), null));
-		board.setSquare("e1", new Square(new Position(5,1), null));
-		board.setSquare("c1", new Square(new Position(3,1), null));
 		board.setSquare("e2", new Square(new Position(5,2), null));
-		board.setSquare("c2", new Square(new Position(3,2), null));
+		board.setSquare("f2", new Square(new Position(6,2), null));
 		
+		assertTrue(king.canMove(board, square, board.getSquare("d1")));
+		assertTrue(king.canMove(board, square, board.getSquare("f1")));
 		assertTrue(king.canMove(board, square, board.getSquare("d2")));
-		assertTrue(king.canMove(board, square, board.getSquare("e1")));
-		assertTrue(king.canMove(board, square, board.getSquare("c1")));
 		assertTrue(king.canMove(board, square, board.getSquare("e2")));
-		assertTrue(king.canMove(board, square, board.getSquare("c2")));	
+		assertTrue(king.canMove(board, square, board.getSquare("f2")));	
 		
 		//Assert that king cannot move to invalid spots (i.e. anywhere not the above positions)
 		for(int i  = 0; i < 64; i++)
 		{
 			String pos = randPos(1, 8, 3, 8);
 			String pos2 = randPos(1,2,1,2);
-			String pos3 = randPos(6,8,1,2);
 			assertFalse(king.canMove(board, square, board.getSquare(pos)));
 			assertFalse(king.canMove(board, square, board.getSquare(pos2)));
-			assertFalse(king.canMove(board, square, board.getSquare(pos3)));
 		}
 		
 		//Change board so that there are capturable pieces in valid spaces
+		board.setSquare("d1", new Square(new Position(4,1), new Pawn(Side.BLACK)));
+		board.setSquare("f1", new Square(new Position(6,1), new Pawn(Side.BLACK)));
 		board.setSquare("d2", new Square(new Position(4,2), new Pawn(Side.BLACK)));
-		board.setSquare("e1", new Square(new Position(5,1), new Pawn(Side.BLACK)));
-		board.setSquare("c1", new Square(new Position(3,1), new Pawn(Side.BLACK)));
 		board.setSquare("e2", new Square(new Position(5,2), new Pawn(Side.BLACK)));
-		board.setSquare("c2", new Square(new Position(3,2), new Pawn(Side.BLACK)));
+		board.setSquare("f2", new Square(new Position(6,2), new Pawn(Side.BLACK)));
 		
+		assertTrue(king.canMove(board, square, board.getSquare("d1")));
+		assertTrue(king.canMove(board, square, board.getSquare("f1")));
 		assertTrue(king.canMove(board, square, board.getSquare("d2")));
-		assertTrue(king.canMove(board, square, board.getSquare("e1")));
-		assertTrue(king.canMove(board, square, board.getSquare("c1")));
 		assertTrue(king.canMove(board, square, board.getSquare("e2")));
-		assertTrue(king.canMove(board, square, board.getSquare("c2")));
+		assertTrue(king.canMove(board, square, board.getSquare("f2")));
 		
 	}
 	
