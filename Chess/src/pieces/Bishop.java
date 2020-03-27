@@ -25,6 +25,5 @@ public class Bishop extends Piece
 	public int getPieceValue()
 	{
 		return Constants.BISHOP_VAL;
-	}
-	
+	}	
 }

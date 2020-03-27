@@ -13,7 +13,7 @@ import board.Board;
 import board.Position;
 import board.Square;
 
-public abstract class Piece
+public abstract class Piece implements Comparable<Piece>
 {
 	/** Which side the piece is on */
 	private Side side;
@@ -351,4 +351,10 @@ public abstract class Piece
 	 * @return Piece value
 	 */
 	public abstract int getPieceValue();
+	
+	@Override
+	public int compareTo(Piece o)
+	{
+		return this.getPieceValue() - o.getPieceValue();
+	}
 }

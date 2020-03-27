@@ -3,10 +3,16 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import chess.Constants;
@@ -42,16 +48,28 @@ public class CapturedPanel extends JPanel
 		blackPanel.removeAll();
 		whitePanel.removeAll();
 		
-		Collections.sort(blackTaken, new Comparator<Piece>()
-		{
-
-			@Override
-			public int compare(Piece o1, Piece o2)
-			{
-				// TODO Auto-generated method stub
-				return Integer.compare(o1.getPieceValue(), o2.getPieceValue());
-			}
-		});
+		Collections.sort(blackTaken);
+		Collections.sort(whiteTaken);
 		
+		for(Piece piece: blackTaken)
+		{
+			//Add path to icon
+			File file = new File(Constants.IMAGES_PATH + piece.toString().replaceAll("\\s", "") + Constants.IMG_SUFFIX);
+			BufferedImage img;
+			try
+			{
+				img = ImageIO.read(file);
+				ImageIcon icon = new ImageIcon(img);
+				JLabel imgLabel = new JLabel(icon);
+				blackPanel.add(imgLabel);
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
+		validate();
 	}
 }
