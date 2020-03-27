@@ -71,7 +71,9 @@ public class Position
 	{
 		this.row = row;
 	}
-	
+	/**
+	 * Returns string of position
+	 */
 	@Override
 	public String toString()
 	{

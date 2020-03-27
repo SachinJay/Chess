@@ -6,6 +6,8 @@ import pieces.*;
 public class Board
 {
 	private Square[][] board;
+	private Square whiteKingSquare;
+	private Square blackKingSquare;
 	
 	public Board()
 	{
@@ -19,7 +21,10 @@ public class Board
 		board[0][0] = new Square(new Position(1,1), new Rook(Side.WHITE));
 		board[0][1] = new Square(new Position(2,1), new Knight(Side.WHITE));
 		board[0][2] = new Square(new Position(3,1), new Bishop(Side.WHITE));
-		board[0][3] = new Square(new Position(4,1), new King(Side.WHITE));
+		
+		whiteKingSquare = new Square(new Position(4,1), new King(Side.WHITE));
+		board[0][3] = whiteKingSquare;
+		
 		board[0][4] = new Square(new Position(5,1), new Queen(Side.WHITE));
 		board[0][5] = new Square(new Position(6,1), new Bishop(Side.WHITE));
 		board[0][6] = new Square(new Position(7,1), new Knight(Side.WHITE));
@@ -39,7 +44,10 @@ public class Board
 		board[7][0] = new Square(new Position(1,8), new Rook(Side.BLACK));
 		board[7][1] = new Square(new Position(2,8), new Knight(Side.BLACK));
 		board[7][2] = new Square(new Position(3,8), new Bishop(Side.BLACK));
-		board[7][3] = new Square(new Position(4,8), new King(Side.BLACK));
+		
+		blackKingSquare =new Square(new Position(4,8), new King(Side.BLACK)); 
+		board[7][3] = blackKingSquare;
+		
 		board[7][4] = new Square(new Position(5,8), new Queen(Side.BLACK));
 		board[7][5] = new Square(new Position(6,8), new Bishop(Side.BLACK));
 		board[7][6] = new Square(new Position(7,8), new Knight(Side.BLACK));
@@ -147,5 +155,26 @@ public class Board
 			}
 			System.out.println();
 		}
+	}
+
+	/**
+	 * return's the square a king is on
+	 * @param side what side king we want
+	 * @return the square that the king resides on
+	 */
+	public Square getKingPos(Side side)
+	{
+		Square ret = side.equals(Side.BLACK) ? blackKingSquare : whiteKingSquare;
+		return ret;
+	}
+	
+	public void setWhiteKingSquare(Square square)
+	{
+		this.whiteKingSquare = square;
+	}
+	
+	public void setBlackKingSquare(Square square)
+	{
+		this.blackKingSquare = square;
 	}
 }

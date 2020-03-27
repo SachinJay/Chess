@@ -12,6 +12,7 @@ import java.util.List;
 import board.Board;
 import board.Position;
 import board.Square;
+import chess.Constants;
 
 public abstract class Piece implements Comparable<Piece>
 {
@@ -48,6 +49,19 @@ public abstract class Piece implements Comparable<Piece>
 			Piece curPiece = start.getPiece();
 			end.setPiece(curPiece);
 			start.setPiece(null);
+			
+			//If this piece is a king, update location in board
+			if(curPiece.getPieceValue() == Constants.KING_VAL)
+			{
+				if(curPiece.getSide().equals(Side.WHITE))
+				{
+					board.setWhiteKingSquare(end);
+				}
+				else 
+				{
+					board.setBlackKingSquare(end);
+				}
+			}
 
 			return p;
 		} else

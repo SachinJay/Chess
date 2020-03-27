@@ -206,6 +206,27 @@ class ChessTests
 		assertEquals("White Rook", a1.getPiece().toString());
 		assertEquals("White Pawn", a2.getPiece().toString());
 		assertEquals("White Queen", e1.getPiece().toString());
+		
+		//Test that king positions update properly
+		assertEquals("d1", board.getKingPos(Side.WHITE).getPos().toString());
+		assertEquals("d8", board.getKingPos(Side.BLACK).getPos().toString());
+		
+		Square blank1 = new Square(new Position(4,2),null);
+		Square blank2 = new Square(new Position(4,7),null);
+		board.setSquare("d2", blank1);
+		board.setSquare("d7", blank2);
+		
+		Square wStart  = board.getSquare("d1");
+		Square bStart = board.getSquare("d8");
+		
+		King whiteKing = (King)wStart.getPiece();
+		King blackKing = (King) bStart.getPiece();
+		
+		whiteKing.move(board, wStart, blank1);
+		blackKing.move(board, bStart, blank2);
+		
+		assertEquals("d2", board.getKingPos(Side.WHITE).getPos().toString());
+		assertEquals("d7", board.getKingPos(Side.BLACK).getPos().toString());
 	}
 	
 	@Test
