@@ -38,6 +38,7 @@ public class Grid
 {
 	private JFrame gameFrame;
 	private CapturedPanel capturedPanel;
+	private StatusPanel statusPanel; 
 	private BoardPanel boardPanel;
 	private Board chessBoard;
 	private Square start;
@@ -61,9 +62,11 @@ public class Grid
 		p2 = new Player("Beep",Side.BLACK);
 		
 		game = new Game(p1,p2);
+		
 		this.gameFrame = new JFrame("Chess Frame");
 		this.gameFrame.setLayout(new BorderLayout());
 		this.capturedPanel = new CapturedPanel();
+		this.statusPanel = new StatusPanel(game);
 		JMenuBar menuBar= new JMenuBar();
 		addToMenuBar(menuBar);
 		this.gameFrame.setJMenuBar(menuBar);
@@ -74,6 +77,7 @@ public class Grid
 		this.boardPanel = new BoardPanel();
 		this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
 		this.gameFrame.add(capturedPanel,BorderLayout.WEST);
+		this.gameFrame.add(statusPanel,BorderLayout.SOUTH);
 		this.gameFrame.setVisible(true);
 	}
 

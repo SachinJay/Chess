@@ -2,6 +2,7 @@ package chess;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
@@ -28,10 +29,10 @@ public class Constants
 	public static final String DEFAULT_NAME = "Sachin";
 	public static final Side DEFAULT_SIDE = Side.WHITE;
 	
-	public static final Dimension FRAME_DIM = new Dimension(700,700);
+	public static final Dimension FRAME_DIM = new Dimension(800,800);
 	public static final Dimension BOARD_DIM = new Dimension(500,500);
 	public static final Dimension SQUARE_DIM = new Dimension(12,12);
-	public static final Dimension STATUS_DIM = new Dimension(50,500);
+	public static final Dimension STATUS_DIM = new Dimension(500,100);
 	
 	//Colors for light and dark squares, found using an online color picker on a board
 	//Did not use black and white because the black pieces did not show up
@@ -56,5 +57,8 @@ public class Constants
 	public static final int KNIGHT_VAL = 3; 
 	public static final int PAWN_VAL = 1; 
 	public static final int KING_VAL = 1000;
+	
+	
+	public static final Font STATUS_FONT = new Font("Times New Roman", 1, 20);
 	
 }

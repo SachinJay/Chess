@@ -45,7 +45,14 @@ class GameTests
 	@Test
 	void gameTests()
 	{
-		Game game = new Game();
+		Player p1 = new Player();
+		Player p2 = new Player("Jay", Side.BLACK);
+		
+		Game game1 = new Game();
+		Game game2 = new Game(p1,p2);
+		
+		assertEquals(Status.IN_PLAY.makeString(), game1.getStatus().makeString());
+		assertEquals(Status.IN_PLAY.makeString(), game2.getStatus().makeString());
 	}
 
 }
