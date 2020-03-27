@@ -10,7 +10,7 @@ import pieces.*;
 class ChessTests
 {
 
-	//@Test
+	@Test
 	void positionTests()
 	{
 		//Default position
@@ -79,7 +79,7 @@ class ChessTests
 		
 	}
 	
-	//@Test
+	@Test
 	void squareTests()
 	{
 		//Default square
@@ -100,7 +100,7 @@ class ChessTests
 		assertEquals(pawn, sqr2.getPiece());
 	}
 	
-	//@Test
+	@Test
 	void pieceTests()
 	{
 		//Test that the get and set side methods work
@@ -151,7 +151,7 @@ class ChessTests
 		
 	}
 	
-	//@Test
+	@Test
 	void boardTests()
 	{
 		Board board = new Board();
@@ -208,7 +208,7 @@ class ChessTests
 		assertEquals("White Queen", e1.getPiece().toString());
 	}
 	
-	//@Test
+	@Test
 	void knightTests()
 	{
 		Board board = new Board();
@@ -245,7 +245,7 @@ class ChessTests
 		board.setSquare("c3", new Square(new Position(3,3), new Pawn(Side.BLACK)));
 	}
 	
-	//@Test
+	@Test
 	void kingTests()
 	{
 		//TODO: Test a few things
@@ -304,7 +304,7 @@ class ChessTests
 		
 	}
 	
-	//@Test
+	@Test
 	void rookTests()
 	{
 		//TODO: Checklist
@@ -404,7 +404,7 @@ class ChessTests
 		
 	}
 	
-	//@Test
+	@Test
 	void pawnTests()
 	{
 		//TODO: Checklist
@@ -547,14 +547,12 @@ class ChessTests
 		assertFalse(bishop.canMove(board, square, board.getSquare("h7")));
 		
 		
-		System.out.println("Bishop test:");
 		//Specific test
 		board.setSquare("e2", new Square(new Position(5,2),null));
 		Square square2 = board.getSquare("f1");
 		Bishop bishop2 = (Bishop) square2.getPiece();
 		//board.print();
 		assertTrue(bishop2.canMove(board, square2, board.getSquare("a6")));
-		System.out.println("End");
 			
 	}
 	

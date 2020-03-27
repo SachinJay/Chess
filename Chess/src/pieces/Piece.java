@@ -209,11 +209,25 @@ public abstract class Piece
 		
 		Boolean pathIsDiagonal = Math.abs(changeInR) == Math.abs(changeInC);
 		
-		if(!pathIsDiagonal)
-			{
-				return false;
-			}
+		if (!pathIsDiagonal)
+		{
+			return false;
+		}
 		
+		if(isBlockingPiece(board, changeInR, changeInC, rStart, cStart, rEnd, cEnd)) return false; 
+		
+		if(end.isEmpty())
+		{
+			return true;
+		}
+		else
+		{
+			return end.getPiece().getSide() != this.getSide();
+		}
+	}
+	
+	private Boolean isBlockingPiece(Board board,int changeInR, int changeInC, int rStart, int cStart, int rEnd, int cEnd)
+	{
 		Boolean rForwards = changeInR >= 0;
 		Boolean cForwards = changeInC >= 0;
 		
@@ -227,7 +241,12 @@ public abstract class Piece
 		int rBound=0;
 		int cBound=0;
 		
-		if(rForwards && !cForwards)
+		Boolean upLeft = rForwards && !cForwards;
+		Boolean downRight = !rForwards && cForwards;
+		Boolean upRight = rForwards && cForwards;
+		Boolean downLeft = !rForwards && !cForwards;
+		
+		if(upLeft)
 		{
 			rBegIndex = rStart+1;
 			cBegIndex = cStart -1;
@@ -242,19 +261,12 @@ public abstract class Piece
 			{
 				for(int c = cBegIndex; c >= cBound; c+=cInc)
 				{
-					//I.e. if along the diagonal
-					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
-					{
-						Position curPos = new Position(c,r);
-						if(!board.getSquare(curPos).isEmpty())
-						{
-							return false;
-						}
-					}
+					if (pieceAlongDiag(board, rBegIndex, cBegIndex, r, c)) return true;
 				}
 			}
+			return false;
 		}
-		else if(!rForwards && cForwards)
+		else if(downRight)
 		{
 			rBegIndex = rStart-1;
 			cBegIndex = cStart +1;
@@ -268,19 +280,12 @@ public abstract class Piece
 			{
 				for(int c = cBegIndex; c <= cBound; c+=cInc)
 				{
-					//I.e. if along the diagonal
-					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
-					{
-						Position curPos = new Position(c,r);
-						if(!board.getSquare(curPos).isEmpty())
-						{
-							return false;
-						}
-					}
+					if (pieceAlongDiag(board, rBegIndex, cBegIndex, r, c)) return true;
 				}
 			}
+			return false;
 		}
-		else if(rForwards && cForwards)
+		else if(upRight)
 		{
 			rBegIndex = rStart+1;
 			cBegIndex = cStart+1;	
@@ -295,19 +300,12 @@ public abstract class Piece
 			{
 				for(int c = cBegIndex; c <= cBound; c+=cInc)
 				{
-					//I.e. if along the diagonal
-					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
-					{
-						Position curPos = new Position(c,r);
-						if(!board.getSquare(curPos).isEmpty())
-						{
-							return false;
-						}
-					}
+					if (pieceAlongDiag(board, rBegIndex, cBegIndex, r, c)) return true;
 				}
 			}
+			return false;
 		}
-		else if(!rForwards && !cForwards)
+		else if(downLeft)
 		{
 			rBegIndex = rStart-1;
 			cBegIndex = cStart-1;
@@ -322,31 +320,29 @@ public abstract class Piece
 			{
 				for(int c = cBegIndex; c >= cBound; c+=cInc)
 				{
-					//I.e. if along the diagonal
-					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
-					{
-						Position curPos = new Position(c,r);
-						if(!board.getSquare(curPos).isEmpty())
-						{
-							return false;
-						}
-					}
+					if (pieceAlongDiag(board, rBegIndex, cBegIndex, r, c)) return true;
 				}
 			}
-		}
-		
-		//TODO recheck the above logic and add other cases
-		
-		//Check that there is nothing on the path
-	
-		
-		if(end.isEmpty())
-		{
-			return true;
+			return false;
 		}
 		else
 		{
-			return end.getPiece().getSide() != this.getSide();
+			return false;			
 		}
+	}
+	
+	private Boolean pieceAlongDiag(Board board, int rBeg, int cBeg, int r,int c)
+	{
+		//I.e. if along the diagonal
+		if(Math.abs(r-rBeg) == Math.abs(c-cBeg))
+		{
+			Position curPos = new Position(c,r);
+			if(!board.getSquare(curPos).isEmpty())
+			{
+				return true;
+			}
+		}
+		
+		return false; 
 	}
 }
