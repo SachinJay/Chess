@@ -29,18 +29,21 @@ public class Constants
 	public static final Side DEFAULT_SIDE = Side.WHITE;
 	
 	public static final Dimension FRAME_DIM = new Dimension(700,700);
-	public static final Dimension BOARD_DIM = new Dimension(500,450);
+	public static final Dimension BOARD_DIM = new Dimension(500,500);
 	public static final Dimension SQUARE_DIM = new Dimension(12,12);
+	public static final Dimension STATUS_DIM = new Dimension(50,500);
 	
 	//Colors for light and dark squares, found using an online color picker on a board
 	//Did not use black and white because the black pieces did not show up
 	public static final Color COL_LIGHT = new Color(255, 241, 220);
 	public static final Color COL_DARK = new Color(182,148,110);
+	
 	public static final String IMAGES_PATH = "src/images/";
 	public static final String IMG_SUFFIX = ".png";
 	public static final String DOT_NAME  = "dot.png";
 	public static final EtchedBorder CAPTURED_BORDER = new EtchedBorder(EtchedBorder.RAISED);
 	public static final MatteBorder BOARD_BORDER = new MatteBorder(5, 5, 5, 5, Color.BLACK);
+	public static final Color STATUS_COLOR = Color.WHITE;
 	
 	//Baby blue
 	public static final Color BABY_BLUE = Color.decode("0x89CFF0");
@@ -53,4 +56,5 @@ public class Constants
 	public static final int KNIGHT_VAL = 3; 
 	public static final int PAWN_VAL = 1; 
 	public static final int KING_VAL = 1000;
+	
 }

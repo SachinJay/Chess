@@ -279,7 +279,7 @@ public class Grid
 								try
 								{
 									bp.drawBoard(chessBoard);
-									capturedPanel.redo(blackTaken, whiteTaken);
+									capturedPanel.reDraw(blackTaken, whiteTaken);
 								} catch (IOException e)
 								{
 									// TODO Auto-generated catch block

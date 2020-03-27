@@ -43,7 +43,7 @@ public class CapturedPanel extends JPanel
 		setPreferredSize(Constants.TAKEN_DIM);
 	}
 	
-	public void redo(ArrayList<Piece> blackTaken, ArrayList<Piece> whiteTaken)
+	public void reDraw(ArrayList<Piece> blackTaken, ArrayList<Piece> whiteTaken)
 	{
 		blackPanel.removeAll();
 		whitePanel.removeAll();
