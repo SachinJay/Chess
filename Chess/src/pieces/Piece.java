@@ -217,15 +217,15 @@ public abstract class Piece
 		Boolean rForwards = changeInR >= 0;
 		Boolean cForwards = changeInC >= 0;
 		
-		int rInc = rForwards? 1 : -1;
-		int cInc = cForwards? 1 : -1;
+		int rInc=0;
+		int cInc=0;
 		
 		//TODO change from add/sub Inc's into just plus 1 because that's all this is
-		int rBegIndex = rForwards && cForwards? rStart + rInc : rEnd +1;
-		int cBegIndex = rForwards && cForwards? cStart + cInc: cEnd +1;
+		int rBegIndex =0;
+		int cBegIndex=0;
 		
-		int rBound = rForwards? rEnd : rStart;
-		int cBound = cForwards? cEnd : cStart;
+		int rBound=0;
+		int cBound=0;
 		
 		if(rForwards && !cForwards)
 		{
@@ -237,6 +237,22 @@ public abstract class Piece
 			
 			rBound = rEnd-1;
 			cBound = cEnd+1;
+			
+			for(int r = rBegIndex; r <= rBound; r+=rInc)
+			{
+				for(int c = cBegIndex; c >= cBound; c+=cInc)
+				{
+					//I.e. if along the diagonal
+					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
+					{
+						Position curPos = new Position(c,r);
+						if(!board.getSquare(curPos).isEmpty())
+						{
+							return false;
+						}
+					}
+				}
+			}
 		}
 		else if(!rForwards && cForwards)
 		{
@@ -248,6 +264,21 @@ public abstract class Piece
 			
 			rBound = rEnd +1; 
 			cBound = cEnd -1; 
+			for(int r = rBegIndex; r >= rBound; r+=rInc)
+			{
+				for(int c = cBegIndex; c <= cBound; c+=cInc)
+				{
+					//I.e. if along the diagonal
+					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
+					{
+						Position curPos = new Position(c,r);
+						if(!board.getSquare(curPos).isEmpty())
+						{
+							return false;
+						}
+					}
+				}
+			}
 		}
 		else if(rForwards && cForwards)
 		{
@@ -259,6 +290,22 @@ public abstract class Piece
 			
 			rBound = rEnd -1; 
 			cBound = cEnd -1; 
+			
+			for(int r = rBegIndex; r <= rBound; r+=rInc)
+			{
+				for(int c = cBegIndex; c <= cBound; c+=cInc)
+				{
+					//I.e. if along the diagonal
+					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
+					{
+						Position curPos = new Position(c,r);
+						if(!board.getSquare(curPos).isEmpty())
+						{
+							return false;
+						}
+					}
+				}
+			}
 		}
 		else if(!rForwards && !cForwards)
 		{
@@ -270,26 +317,28 @@ public abstract class Piece
 			
 			rBound = rEnd + 1; 
 			cBound = cEnd + 1; 
+			
+			for(int r = rBegIndex; r >= rBound; r+=rInc)
+			{
+				for(int c = cBegIndex; c >= cBound; c+=cInc)
+				{
+					//I.e. if along the diagonal
+					if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
+					{
+						Position curPos = new Position(c,r);
+						if(!board.getSquare(curPos).isEmpty())
+						{
+							return false;
+						}
+					}
+				}
+			}
 		}
 		
 		//TODO recheck the above logic and add other cases
 		
 		//Check that there is nothing on the path
-		for(int r = rBegIndex; r <= rBound; r+=rInc)
-		{
-			for(int c = cBegIndex; c <= cBound; c+=cInc)
-			{
-				//I.e. if along the diagonal
-				if(Math.abs(r-rBegIndex) == Math.abs(c-cBegIndex))
-				{
-					Position curPos = new Position(c,r);
-					if(!board.getSquare(curPos).isEmpty())
-					{
-						return false;
-					}
-				}
-			}
-		}
+	
 		
 		if(end.isEmpty())
 		{
