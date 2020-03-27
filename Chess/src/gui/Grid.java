@@ -36,6 +36,7 @@ import board.Square;
 public class Grid
 {
 	private JFrame gameFrame;
+	private CapturedPanel capturedPanel;
 	private BoardPanel boardPanel;
 	private Board chessBoard;
 	private Square start;
@@ -45,10 +46,15 @@ public class Grid
 	private Player p1;
 	private Player p2;
 	private Boolean showLegalMoves;
+	ArrayList<Piece> blackTaken;
+	ArrayList<Piece> whiteTaken;
 	
 	public Grid() throws IOException
 	{
 		showLegalMoves = false;
+		
+		blackTaken = new ArrayList<>();
+		whiteTaken = new ArrayList<>();
 		
 		p1 = new Player("Sachin", Side.WHITE);
 		p2 = new Player("Beep",Side.BLACK);
@@ -56,6 +62,7 @@ public class Grid
 		game = new Game(p1,p2);
 		this.gameFrame = new JFrame("Chess Frame");
 		this.gameFrame.setLayout(new BorderLayout());
+		this.capturedPanel = new CapturedPanel();
 		JMenuBar menuBar= new JMenuBar();
 		addToMenuBar(menuBar);
 		this.gameFrame.setJMenuBar(menuBar);
@@ -65,6 +72,7 @@ public class Grid
 		this.gameFrame.setSize(Constants.FRAME_DIM);
 		this.boardPanel = new BoardPanel();
 		this.gameFrame.add(this.boardPanel,BorderLayout.CENTER);
+		this.gameFrame.add(capturedPanel,BorderLayout.WEST);
 		this.gameFrame.setVisible(true);
 	}
 
@@ -242,7 +250,18 @@ public class Grid
 						{
 							end = chessBoard.getSquare(pos);
 							Boolean changeTurn = curPiece.canMove(chessBoard, start, end);
-							curPiece.move(chessBoard, start, end);
+							Piece capturedPiece = curPiece.move(chessBoard, start, end);
+							if(capturedPiece != null)
+							{
+								if(capturedPiece.getSide().equals(Side.WHITE))
+								{
+									whiteTaken.add(capturedPiece);
+								}
+								else
+								{
+									blackTaken.add(capturedPiece);
+								}								
+							}
 							//TODO add move to list of moves
 							reset();
 							if(changeTurn) game.changeTurn();
@@ -257,6 +276,7 @@ public class Grid
 								try
 								{
 									bp.drawBoard(chessBoard);
+									capturedPanel.redo(blackTaken, whiteTaken);
 								} catch (IOException e)
 								{
 									// TODO Auto-generated catch block

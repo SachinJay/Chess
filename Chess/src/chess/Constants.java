@@ -42,7 +42,7 @@ public class Constants
 	
 	//Baby blue
 	public static final Color BABY_BLUE = Color.decode("0x89CFF0");
-	public static final Dimension TAKEN_DIM = new Dimension(80,40);
+	public static final Dimension TAKEN_DIM = new Dimension(80,80);
 	
 	//Chess piece values
 	public static final int QUEEN_VAL = 9; 

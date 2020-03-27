@@ -70,6 +70,25 @@ public class CapturedPanel extends JPanel
 			
 		}
 		
+		for(Piece piece: whiteTaken)
+		{
+			//Add path to icon
+			File file = new File(Constants.IMAGES_PATH + piece.toString().replaceAll("\\s", "") + Constants.IMG_SUFFIX);
+			BufferedImage img;
+			try
+			{
+				img = ImageIO.read(file);
+				ImageIcon icon = new ImageIcon(img);
+				JLabel imgLabel = new JLabel(icon);
+				blackPanel.add(imgLabel);
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		
 		validate();
 	}
 }
