@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -107,14 +108,15 @@ public class Grid
 	private JMenu createPreferencesMenu()
 	{
 		JMenu prefMenu = new JMenu("Preferences");
-		JMenuItem moves = new JMenuItem("Show Legal Moves");
+		JCheckBoxMenuItem moves = new JCheckBoxMenuItem("Show Legal Moves");
 		moves.addActionListener(new ActionListener()
 		{
 			
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				showLegalMoves = !showLegalMoves;				
+				showLegalMoves = !showLegalMoves;	
+				moves.setSelected(showLegalMoves);
 			}
 		});
 		
