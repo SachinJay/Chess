@@ -80,7 +80,7 @@ public class CapturedPanel extends JPanel
 				img = ImageIO.read(file);
 				ImageIcon icon = new ImageIcon(img);
 				JLabel imgLabel = new JLabel(icon);
-				blackPanel.add(imgLabel);
+				whitePanel.add(imgLabel);
 			} catch (IOException e)
 			{
 				// TODO Auto-generated catch block
