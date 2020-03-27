@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import board.Board;
 import game.Game;
 import game.Player;
 import game.Status;
@@ -15,14 +16,16 @@ class GameTests
 	@Test
 	void statusTests()
 	{
-		Status[] statuses = {Status.BLACK_WIN,Status.CHECK,Status.FORFEIT,Status.IN_PLAY,
-				Status.PAUSED, Status.STALE_MATE, Status.WHITE_WIN};
+		Status[] statuses = {Status.BLACK_WIN,Status.BLACK_IS_IN_CHECK,Status.WHITE_IS_IN_CHECK,Status.FORFEIT,Status.IN_PLAY,
+				Status.PAUSED, Status.STALEMATE, Status.WHITE_WIN};
 		
-		String[] strings = {"Black Win", "Check", "Forfeit", "In Play", "Paused", "Stale Mate", "White Win"};
+		String[] strings = {"Black win", "Black is in check", "White is in check","Forfeit", "In play", 
+				"Paused", "Stalemate", "White win"};
 		
 		for(int i = 0; i < statuses.length; i++)
 		{
 			assertEquals(strings[i], statuses[i].makeString());
+			
 		}
 	}
 	
@@ -48,11 +51,15 @@ class GameTests
 		Player p1 = new Player();
 		Player p2 = new Player("Jay", Side.BLACK);
 		
-		Game game1 = new Game();
-		Game game2 = new Game(p1,p2);
+		Board board = new Board();
+		
+		Game game1 = new Game(board);
+		Game game2 = new Game(p1,p2,board);
 		
 		assertEquals(Status.IN_PLAY.makeString(), game1.getStatus().makeString());
 		assertEquals(Status.IN_PLAY.makeString(), game2.getStatus().makeString());
+		
+		game1.getBoard().print();
 	}
 
 }
