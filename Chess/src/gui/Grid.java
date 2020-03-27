@@ -58,10 +58,11 @@ public class Grid
 		blackTaken = new ArrayList<>();
 		whiteTaken = new ArrayList<>();
 		
+		this.chessBoard = new Board();
 		p1 = new Player("Sachin", Side.WHITE);
 		p2 = new Player("Beep",Side.BLACK);
 		
-		game = new Game(p1,p2);
+		game = new Game(p1,p2,chessBoard);
 		
 		this.gameFrame = new JFrame("Chess Frame");
 		this.gameFrame.setLayout(new BorderLayout());
@@ -70,7 +71,6 @@ public class Grid
 		JMenuBar menuBar= new JMenuBar();
 		addToMenuBar(menuBar);
 		this.gameFrame.setJMenuBar(menuBar);
-		this.chessBoard = new Board();
 		
 		
 		this.gameFrame.setSize(Constants.FRAME_DIM);

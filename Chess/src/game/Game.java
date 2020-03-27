@@ -1,6 +1,8 @@
 package game;
 
 import board.Board;
+import board.Square;
+import pieces.Piece;
 import pieces.Side;
 
 public class Game
@@ -135,7 +137,29 @@ public class Game
 	 */
 	private boolean isInCheck(Side side)
 	{
-		// TODO Auto-generated method stub
+		Side sideWhoseLegalMovesMatter = side.equals(Side.WHITE) ? Side.BLACK : Side.WHITE;
+		
+		//Find side's king
+		Square kingSquare  = this.board.getKingPos(side);
+		
+		//check if any of sideWhoseLegalMovesMatter's pieces can legally get the king
+		//i.e. if any of those pieces can legally move to king's position
+		
+		for (Square[] arr : board.getBoard())
+		{
+			for (Square start : arr)
+			{
+				if(!start.isEmpty() && start.getPiece().getSide().equals(sideWhoseLegalMovesMatter))
+				{
+					Piece curPiece = start.getPiece();
+					if (curPiece.legalMoves(board, start).contains(kingSquare))
+					{
+						return true;
+					}
+				}
+			}
+		}
+
 		return false;
 	}
 	
