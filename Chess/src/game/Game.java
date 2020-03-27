@@ -1,6 +1,7 @@
 package game;
 
 import board.Board;
+import pieces.Side;
 
 public class Game
 {
@@ -10,21 +11,21 @@ public class Game
 	private Player turn;
 	private int turnInd;
 	
-	public Game()
+	public Game(Board board)
 	{
 		players[0] = new Player();
 		players[1] = new Player();
-		setBoard(new Board());
+		setBoard(board);
 		setStatus(Status.IN_PLAY);
 		turnInd = 0;
 		setTurn(players[turnInd]);
 	}
 	
-	public Game(Player p1, Player p2)
+	public Game(Player p1, Player p2,Board board)
 	{
 		players[0] = p1;
 		players[1] = p2;
-		setBoard(new Board());
+		setBoard(board);
 		setStatus(Status.IN_PLAY);
 		turnInd = 0;
 		setTurn(players[turnInd]);
@@ -35,7 +36,7 @@ public class Game
 	 */
 	public Status getStatus()
 	{
-		return status;
+		return this.calcStatus();
 	}
 
 	/**
@@ -85,6 +86,57 @@ public class Game
 	{
 		this.turnInd = 1-this.turnInd;
 		this.turn = this.players[this.turnInd];
+	}
+	
+	/**
+	 * Based on the board at hand, calculates status
+	 * @return The status of the game
+	 */
+	private Status calcStatus()
+	{
+		//TODO implement
+		if(this.isInCheck(Side.WHITE))
+		{
+			return Status.WHITE_IS_IN_CHECK;
+		}
+		else if(this.isInCheck(Side.BLACK))
+		{
+			return Status.BLACK_IS_IN_CHECK;
+		}
+		else if(this.sideWon(Side.BLACK))
+		{
+			return Status.BLACK_WIN;
+		}
+		else if(this.sideWon(Side.WHITE))
+		{
+			return Status.WHITE_WIN;
+		}
+		else
+		{
+			return Status.IN_PLAY;
+		}
+	}
+
+	/**
+	 * Checks if a certain side is in checkmate
+	 * @param side the side that caused checkmate
+	 * @return true if side caused checkmate
+	 */
+	private boolean sideWon(Side side)
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * Checks is side is in check
+	 * @param side side that may be in check
+	 * @return true if side is in check
+	 */
+	private boolean isInCheck(Side side)
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	
