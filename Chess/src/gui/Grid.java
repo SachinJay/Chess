@@ -284,6 +284,7 @@ public class Grid
 								{
 									bp.drawBoard(chessBoard);
 									capturedPanel.reDraw(blackTaken, whiteTaken);
+									statusPanel.redraw(game);
 								} catch (IOException e)
 								{
 									// TODO Auto-generated catch block
