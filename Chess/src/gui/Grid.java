@@ -292,7 +292,7 @@ public class Grid
 			//Replace true with a predicate relating to preferences in menu bar
 			if(true)
 			{
-				File file = new File(Constants.IMAGES_PATH + "Dot.jpg");
+				File file = new File(Constants.IMAGES_PATH + Constants.DOT_NAME);
 				for(Square sqr : legalSquares(board))
 				{
 					String curPos = Position.posToStr(sqr.getPos().getCol()) + sqr.getPos().getRow();

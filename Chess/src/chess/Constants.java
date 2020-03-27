@@ -34,4 +34,5 @@ public class Constants
 	public static final Color COL_DARK = new Color(182,148,110);
 	public static final String IMAGES_PATH = "src/images/";
 	public static final String IMG_SUFFIX = ".png";
+	public static final String DOT_NAME  = "dot.png";
 }
