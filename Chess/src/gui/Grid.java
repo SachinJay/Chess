@@ -51,7 +51,7 @@ public class Grid
 	
 	public Grid() throws IOException
 	{
-		showLegalMoves = false;
+		showLegalMoves = true;
 		
 		blackTaken = new ArrayList<>();
 		whiteTaken = new ArrayList<>();
@@ -117,6 +117,7 @@ public class Grid
 	{
 		JMenu prefMenu = new JMenu("Preferences");
 		JCheckBoxMenuItem moves = new JCheckBoxMenuItem("Show Legal Moves");
+		moves.setSelected(showLegalMoves);
 		moves.addActionListener(new ActionListener()
 		{
 			
