@@ -20,3 +20,4 @@ Goals:
   - [ ] en passant
   - [ ] castling
   - [ ] pawn promotion
+- [ ] Minimax
