@@ -4,11 +4,12 @@ public enum Status
 {
 	WHITE_WIN,
 	BLACK_WIN,
-	STALE_MATE,
-	CHECK,
+	STALEMATE,
 	FORFEIT,
 	IN_PLAY,
-	PAUSED;
+	PAUSED,
+	BLACK_IS_IN_CHECK, 
+	WHITE_IS_IN_CHECK;
 	
 	/**
 	 * Makes status into string
@@ -18,15 +19,10 @@ public enum Status
 	 */
 	public String makeString()
 	{
-		String[] arr = this.toString().split("_");
-		String ret = "";
-		for(String str : arr)
-		{
-			String first = ((Character) str.charAt(0)).toString();
-			String last = str.substring(1);
-			ret  = ret + first+last.toLowerCase() + " ";
-		}
+		String str = this.toString().replaceAll("_", " ");
 		
-		return ret.trim();
+		str = ((Character)str.charAt(0)).toString() + str.substring(1).toLowerCase();
+		
+		return str.trim();
 	}
 }
