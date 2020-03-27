@@ -8,6 +8,12 @@ import board.Board;
 import game.Game;
 import game.Player;
 import game.Status;
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Queen;
+import pieces.Rook;
 import pieces.Side;
 
 class GameTests
@@ -59,11 +65,10 @@ class GameTests
 		assertEquals(Status.IN_PLAY.makeString(), game1.getStatus().makeString());
 		assertEquals(Status.IN_PLAY.makeString(), game2.getStatus().makeString());
 		
-		game1.getBoard().print();
+		board.initArabian();
 		
-		//Test check function
-		Side black = Side.BLACK;
-		Side white = Side.WHITE;
+		board.print();
+		
 	}
 
 }

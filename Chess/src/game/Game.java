@@ -40,7 +40,8 @@ public class Game
 	 */
 	public Status getStatus()
 	{
-		return this.calcStatus();
+		this.calcStatus();
+		return this.status;
 	}
 
 	/**
@@ -96,27 +97,34 @@ public class Game
 	 * Based on the board at hand, calculates status
 	 * @return The status of the game
 	 */
-	private Status calcStatus()
+	private void calcStatus()
 	{
-		if(this.sideWon(Side.BLACK))
+		Boolean whiteTurn = this.turn.getSide().equals(Side.WHITE);
+		Boolean blackTurn = this.turn.getSide().equals(Side.BLACK);
+		Boolean whiteCheckMate = this.isInCheckMate(Side.WHITE);
+		Boolean blackCheckMate = this.isInCheckMate(Side.BLACK);
+		Boolean whiteCheck = this.isInCheck(Side.WHITE);
+		Boolean blackCheck = this.isInCheck(Side.BLACK);
+		
+		if(whiteTurn && whiteCheckMate)
 		{
-			return Status.BLACK_WIN;
+			this.status = Status.BLACK_WIN;
 		}
-		else if(this.sideWon(Side.WHITE))
+		else if(blackTurn && blackCheckMate)
 		{
-			return Status.WHITE_WIN;
+			this.status = Status.WHITE_WIN;
 		}
-		else if(this.isInCheck(Side.WHITE))
+		else if(whiteTurn && whiteCheck)
 		{
-			return Status.WHITE_IS_IN_CHECK;
+			this.status = Status.WHITE_IS_IN_CHECK;
 		}
-		else if(this.isInCheck(Side.BLACK))
+		else if(blackTurn && blackCheck)
 		{
-			return Status.BLACK_IS_IN_CHECK;
+			this.status = Status.BLACK_IS_IN_CHECK;
 		}
 		else
 		{
-			return Status.IN_PLAY;
+			this.status = Status.IN_PLAY;
 		}
 	}
 
@@ -125,23 +133,21 @@ public class Game
 	 * @param side the side that caused checkmate
 	 * @return true if side caused checkmate
 	 */
-	private boolean sideWon(Side side)
+	public boolean isInCheckMate(Side side)
 	{
 		// TODO Auto-generated method stub
 		
 		//Check, is opposite side in check? If not, return false
 		//If it is in check, check if there is any move that side can make that results in 
 		
-		Side opSide = side.equals(Side.WHITE) ? Side.BLACK : Side.WHITE;
-		
-		if(this.isInCheck(opSide))
+		if(this.isInCheck(side))
 		{
 			//check if opSide can make a move that results in no more check i.e. !isInCheck(opSide)
 			for(Square[] arr : board.getBoard())
 			{
 				for(Square square : arr)
 				{
-					if(!square.isEmpty() && square.getPiece().getSide().equals(opSide))
+					if(!square.isEmpty() && square.getPiece().getSide().equals(side))
 					{
 						Piece curPiece = square.getPiece();
 						ArrayList<Square> legalMoves = curPiece.legalMoves(board, square);
@@ -149,8 +155,9 @@ public class Game
 						{
 							Piece takenPieceOrNull = curPiece.move(board, square, end);
 
-							if(!this.isInCheck(opSide))
+							if(!this.isInCheck(side))
 							{
+								System.out.println(curPiece.toString()+" could move to "+end.getPos().toString());
 								return false;
 							}
 							

@@ -73,6 +73,20 @@ public class Board
 		}
 	}
 
+	
+	/**
+	 * makes the whole board blank
+	 */
+	public void blank()
+	{
+		for(Square[] arr : board)
+		{
+			for(Square sqr : arr)
+			{
+				sqr.setPiece(null);
+			}
+		}
+	}
 	/**
 	 * @return the board
 	 */
@@ -177,4 +191,15 @@ public class Board
 	{
 		this.blackKingSquare = square;
 	}
+	
+	public void initArabian()
+	{
+		blank();
+		
+		board[7][7] = new Square(new Position(8,8), new King(Side.BLACK));
+		board[6][7] = new Square(new Position(8,7), new Rook(Side.WHITE));
+		board[5][5] = new Square(new Position(6,6), new Knight(Side.WHITE));
+		
+	}
+	
 }
