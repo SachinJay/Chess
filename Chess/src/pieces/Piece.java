@@ -345,4 +345,10 @@ public abstract class Piece
 		
 		return false; 
 	}
+
+	/**
+	 * Used in order to compare pieces for sorting
+	 * @return Piece value
+	 */
+	public abstract int getPieceValue();
 }

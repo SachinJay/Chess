@@ -31,5 +31,11 @@ public class Knight extends Piece
 		//If it does throw an error though, it will not be reached because this will short circuit
 		return isValidKnightMove && (end.isEmpty() || !end.getPiece().getSide().equals(this.getSide()));
 	}
+
+	@Override
+	public int getPieceValue()
+	{
+		return Constants.KNIGHT_VAL;
+	}
 	
 }

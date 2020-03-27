@@ -3,6 +3,7 @@ package pieces;
 import board.Board;
 import board.Position;
 import board.Square;
+import chess.Constants;
 
 public class Bishop extends Piece
 {
@@ -18,6 +19,12 @@ public class Bishop extends Piece
 	public Boolean canMove(Board board, Square start, Square end)
 	{
 		return canMoveBishoply(board, start, end);		
+	}
+
+	@Override
+	public int getPieceValue()
+	{
+		return Constants.BISHOP_VAL;
 	}
 	
 }

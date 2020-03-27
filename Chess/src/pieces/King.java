@@ -2,6 +2,7 @@ package pieces;
 
 import board.Board;
 import board.Square;
+import chess.Constants;
 
 public class King extends Piece
 {
@@ -23,6 +24,12 @@ public class King extends Piece
 		Boolean isValid = changeInR <=1 && changeInC <= 1 && !(changeInR == 0 && changeInC == 0);
 		
 		return isValid && (end.isEmpty() || !end.getPiece().getSide().equals(this.getSide()));
+	}
+
+	@Override
+	public int getPieceValue()
+	{
+		return Constants.KING_VAL;
 	}
 
 }

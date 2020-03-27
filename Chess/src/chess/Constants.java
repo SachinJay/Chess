@@ -3,6 +3,9 @@ package chess;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+
 import pieces.Side;
 
 public class Constants
@@ -35,4 +38,17 @@ public class Constants
 	public static final String IMAGES_PATH = "src/images/";
 	public static final String IMG_SUFFIX = ".png";
 	public static final String DOT_NAME  = "dot.png";
+	public static final EtchedBorder BORDER = new EtchedBorder(EtchedBorder.RAISED);
+	
+	//Baby blue
+	public static final Color BABY_BLUE = Color.decode("0x89CFF0");
+	public static final Dimension TAKEN_DIM = new Dimension(80,40);
+	
+	//Chess piece values
+	public static final int QUEEN_VAL = 9; 
+	public static final int ROOK_VAL = 5; 
+	public static final int BISHOP_VAL = 3;
+	public static final int KNIGHT_VAL = 3; 
+	public static final int PAWN_VAL = 1; 
+	public static final int KING_VAL = 1000;
 }

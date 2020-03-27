@@ -3,6 +3,7 @@ package pieces;
 import board.Board;
 import board.Position;
 import board.Square;
+import chess.Constants;
 
 public class Rook extends Piece
 {
@@ -17,5 +18,11 @@ public class Rook extends Piece
 	public Boolean canMove(Board board, Square start, Square end)
 	{
 		return canMoveRookily(board, start, end);		
+	}
+
+	@Override
+	public int getPieceValue()
+	{
+		return Constants.ROOK_VAL;
 	}
 }

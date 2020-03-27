@@ -82,4 +82,10 @@ public class Pawn extends Piece
 		
 	}
 
+	@Override
+	public int getPieceValue()
+	{
+		return Constants.PAWN_VAL;
+	}
+
 }
