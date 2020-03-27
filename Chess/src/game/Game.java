@@ -1,5 +1,7 @@
 package game;
 
+import java.util.ArrayList;
+
 import board.Board;
 import board.Square;
 import pieces.Piece;
@@ -127,7 +129,46 @@ public class Game
 	private boolean sideWon(Side side)
 	{
 		// TODO Auto-generated method stub
-		return false;
+		
+		//Check, is opposite side in check? If not, return false
+		//If it is in check, check if there is any move that side can make that results in 
+		
+		Side opSide = side.equals(Side.WHITE) ? Side.BLACK : Side.WHITE;
+		
+		if(this.isInCheck(opSide))
+		{
+			//check if opSide can make a move that results in no more check i.e. !isInCheck(opSide)
+			for(Square[] arr : board.getBoard())
+			{
+				for(Square square : arr)
+				{
+					if(!square.isEmpty() && square.getPiece().getSide().equals(opSide))
+					{
+						Piece curPiece = square.getPiece();
+						ArrayList<Square> legalMoves = curPiece.legalMoves(board, square);
+						for (Square end : legalMoves)
+						{
+							Piece takenPieceOrNull = curPiece.move(board, square, end);
+
+							if(!this.isInCheck(opSide))
+							{
+								return false;
+							}
+							
+							curPiece.overrideMove(board, end, square);
+							// put piece back
+							end.setPiece(takenPieceOrNull);
+						}
+					}
+				}
+			}
+			return true;
+		}
+		else 
+		{
+			return false; 
+		}
+		
 	}
 
 	/**
@@ -135,7 +176,7 @@ public class Game
 	 * @param side side that may be in check
 	 * @return true if side is in check
 	 */
-	private boolean isInCheck(Side side)
+	public boolean isInCheck(Side side)
 	{
 		Side sideWhoseLegalMovesMatter = side.equals(Side.WHITE) ? Side.BLACK : Side.WHITE;
 		

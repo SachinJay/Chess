@@ -69,6 +69,38 @@ public abstract class Piece implements Comparable<Piece>
 			return null;
 		}
 	}
+	
+	/**
+	 * Moves piece regardless of legality, used to reverse a piece movement
+	 * @param board
+	 * @param start
+	 * @param end
+	 * @return the piece that was taken, or null if moved to empty space
+	 */
+	public Piece overrideMove(Board board, Square start, Square end)
+	{
+		
+			Piece p = end.isEmpty() ? null : end.getPiece();
+
+			Piece curPiece = start.getPiece();
+			end.setPiece(curPiece);
+			start.setPiece(null);
+			
+			//If this piece is a king, update location in board
+			if(curPiece.getPieceValue() == Constants.KING_VAL)
+			{
+				if(curPiece.getSide().equals(Side.WHITE))
+				{
+					board.setWhiteKingSquare(end);
+				}
+				else 
+				{
+					board.setBlackKingSquare(end);
+				}
+			}
+
+			return p;	
+	}
 
 	/**
 	 * Returns all valid moves

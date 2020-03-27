@@ -60,6 +60,10 @@ class GameTests
 		assertEquals(Status.IN_PLAY.makeString(), game2.getStatus().makeString());
 		
 		game1.getBoard().print();
+		
+		//Test check function
+		Side black = Side.BLACK;
+		Side white = Side.WHITE;
 	}
 
 }
