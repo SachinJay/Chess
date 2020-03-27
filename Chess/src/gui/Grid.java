@@ -28,6 +28,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.Border;
 
 import board.Board;
 import board.Position;
@@ -153,6 +154,7 @@ public class Grid
 				}
 			}
 			
+			setBorder(Constants.BOARD_BORDER );
 			setPreferredSize(Constants.BOARD_DIM);
 			validate();
 		}

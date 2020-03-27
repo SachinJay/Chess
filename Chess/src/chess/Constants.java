@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.MatteBorder;
 
 import pieces.Side;
 
@@ -38,7 +39,8 @@ public class Constants
 	public static final String IMAGES_PATH = "src/images/";
 	public static final String IMG_SUFFIX = ".png";
 	public static final String DOT_NAME  = "dot.png";
-	public static final EtchedBorder BORDER = new EtchedBorder(EtchedBorder.RAISED);
+	public static final EtchedBorder CAPTURED_BORDER = new EtchedBorder(EtchedBorder.RAISED);
+	public static final MatteBorder BOARD_BORDER = new MatteBorder(5, 5, 5, 5, Color.BLACK);
 	
 	//Baby blue
 	public static final Color BABY_BLUE = Color.decode("0x89CFF0");

@@ -28,7 +28,7 @@ public class CapturedPanel extends JPanel
 		super(new BorderLayout());
 		//TODO put in constants (baby blue)
 		setBackground(Constants.BABY_BLUE);
-		setBorder(Constants.BORDER);
+		setBorder(Constants.CAPTURED_BORDER);
 		
 		//8x2 because a) we want it to be vertically long and b) you can only take 16 pieces from a player		
 		whitePanel = new JPanel(new GridLayout(8,2));
