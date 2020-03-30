@@ -1,5 +1,7 @@
 package board;
 
+import java.util.ArrayList;
+
 import chess.Constants;
 import pieces.*;
 
@@ -202,4 +204,28 @@ public class Board
 		
 	}
 	
+	/**
+	 * Gets all possible next moves for the given side
+	 * @param side the side in question
+	 * @return all possible square the 
+	 */
+	public ArrayList<Tuple<Piece,ArrayList<Square>>> nextMoves(Side side)
+	{
+		ArrayList<Tuple<Piece,ArrayList<Square>>> ret = new ArrayList<Tuple<Piece,ArrayList<Square>>>();
+		for(Square[] arr : this.board)
+		{
+			for(Square square : arr)
+			{
+				if(!square.isEmpty())
+				{
+					Piece curPiece = square.getPiece();
+					ArrayList<Square> list = curPiece.legalMoves(this, square);
+					Tuple<Piece, ArrayList<Square>> tuple = new Tuple<Piece, ArrayList<Square>>(curPiece,list);	
+					ret.add(tuple);
+				}
+			}
+		}
+		
+		return ret;
+	}
 }
