@@ -69,8 +69,6 @@ class GameTests
 		
 		assertTrue(game1.isInCheckMate(Side.BLACK));
 		
-		board.print();
-		
 	}
 
 }

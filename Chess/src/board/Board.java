@@ -228,4 +228,26 @@ public class Board
 		
 		return ret;
 	}
+	
+	/**
+	 * Gets all pieces of certain side along with the square they are on
+	 * @param side the side in question
+	 * @return all pieces of that side, along with square they are on
+	 */
+	public ArrayList<Tuple<Piece,Square>> piecesWithStarts(Side side)
+	{
+		ArrayList<Tuple<Piece,Square>> ret = new ArrayList<Tuple<Piece,Square>>();
+		for(Square[] arr : this.board)
+		{
+			for(Square start : arr)
+			{
+				if(!start.isEmpty() && start.getPiece().getSide().equals(side))
+				{
+					ret.add(new Tuple<Piece, Square>(start.getPiece(), start));					
+				}
+			}
+		}
+		
+		return ret;
+	}
 }
