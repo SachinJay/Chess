@@ -69,6 +69,13 @@ class GameTests
 		
 		assertTrue(game1.isInCheckMate(Side.BLACK));
 		
+		board.initAnderssen();
+		assertTrue(game1.isInCheck(Side.BLACK));
+		
+		board.initBackRankMate();
+		assertTrue(game1.isInCheck(Side.WHITE));
+		board.print();
+		
 	}
 
 }

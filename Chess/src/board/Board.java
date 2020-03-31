@@ -194,14 +194,47 @@ public class Board
 		this.blackKingSquare = square;
 	}
 	
+	/**
+	 * Puts the board into an arabian mate for the purpose of testing checkmate function
+	 */
 	public void initArabian()
 	{
 		blank();
 		
 		board[7][7] = new Square(new Position(8,8), new King(Side.BLACK));
+		this.setBlackKingSquare(board[7][7]);
 		board[6][7] = new Square(new Position(8,7), new Rook(Side.WHITE));
 		board[5][5] = new Square(new Position(6,6), new Knight(Side.WHITE));
 		
+	}
+	
+	/**
+	 * puts board into Anderssen's mate for the purpose of testing checkmate function
+	 */
+	public void initAnderssen()
+	{
+		blank();
+		
+		board[6][7] = new Square(new Position(7,8),new King(Side.BLACK));
+		this.setBlackKingSquare(board[6][7]);
+		
+		board[5][5] = new Square(new Position(6,6),new King(Side.WHITE));
+		this.setWhiteKingSquare(board[5][5]);
+		
+		board[6][6] = new Square(new Position(7,7),new Pawn(Side.WHITE));
+		board[7][7] = new Square(new Position(8,8),new Rook(Side.WHITE));
+	}
+	
+	/**
+	 * puts board into back rank mate for the purpose of testing checkmate function
+	 */
+	public void initBackRankMate()
+	{
+		blank();
+		
+		board[0][0] = new Square(new Position(1,1),new Rook(Side.BLACK));
+		board[0][7] = new Square(new Position(1,8),new King(Side.WHITE));
+		this.setWhiteKingSquare(board[0][7]);
 	}
 	
 	/**
