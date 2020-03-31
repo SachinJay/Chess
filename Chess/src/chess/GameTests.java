@@ -73,8 +73,13 @@ class GameTests
 		assertTrue(game1.isInCheck(Side.BLACK));
 		
 		board.initBackRankMate();
-		assertTrue(game1.isInCheck(Side.WHITE));
-		board.print();
+		assertTrue(game1.isInCheckMate(Side.WHITE));
+		
+		board.initDamianoBishop();
+		assertTrue(game1.isInCheckMate(Side.WHITE));
+		
+		board.initBox();
+		assertTrue(game1.isInCheckMate(Side.WHITE));
 		
 	}
 

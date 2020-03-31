@@ -146,6 +146,9 @@ public class Board
 	 */
 	public void print()
 	{
+		System.out.println();
+		System.out.println();
+		
 		for(int r = 7; r >= 0; r--)
 		{
 			for(int c = 0; c <= 7; c++)
@@ -171,6 +174,9 @@ public class Board
 			}
 			System.out.println();
 		}
+		
+		System.out.println();
+		System.out.println();
 	}
 
 	/**
@@ -194,48 +200,7 @@ public class Board
 		this.blackKingSquare = square;
 	}
 	
-	/**
-	 * Puts the board into an arabian mate for the purpose of testing checkmate function
-	 */
-	public void initArabian()
-	{
-		blank();
-		
-		board[7][7] = new Square(new Position(8,8), new King(Side.BLACK));
-		this.setBlackKingSquare(board[7][7]);
-		board[6][7] = new Square(new Position(8,7), new Rook(Side.WHITE));
-		board[5][5] = new Square(new Position(6,6), new Knight(Side.WHITE));
-		
-	}
-	
-	/**
-	 * puts board into Anderssen's mate for the purpose of testing checkmate function
-	 */
-	public void initAnderssen()
-	{
-		blank();
-		
-		board[6][7] = new Square(new Position(7,8),new King(Side.BLACK));
-		this.setBlackKingSquare(board[6][7]);
-		
-		board[5][5] = new Square(new Position(6,6),new King(Side.WHITE));
-		this.setWhiteKingSquare(board[5][5]);
-		
-		board[6][6] = new Square(new Position(7,7),new Pawn(Side.WHITE));
-		board[7][7] = new Square(new Position(8,8),new Rook(Side.WHITE));
-	}
-	
-	/**
-	 * puts board into back rank mate for the purpose of testing checkmate function
-	 */
-	public void initBackRankMate()
-	{
-		blank();
-		
-		board[0][0] = new Square(new Position(1,1),new Rook(Side.BLACK));
-		board[0][7] = new Square(new Position(1,8),new King(Side.WHITE));
-		this.setWhiteKingSquare(board[0][7]);
-	}
+
 	
 	/**
 	 * Gets all possible next moves for the given side
@@ -282,5 +247,79 @@ public class Board
 		}
 		
 		return ret;
+	}
+	/**
+	 * Puts the board into an arabian mate for the purpose of testing checkmate function
+	 */
+	public void initArabian()
+	{
+		blank();
+		
+		board[7][7] = new Square(new Position(8,8), new King(Side.BLACK));
+		this.setBlackKingSquare(board[7][7]);
+		board[6][7] = new Square(new Position(8,7), new Rook(Side.WHITE));
+		board[5][5] = new Square(new Position(6,6), new Knight(Side.WHITE));
+		
+	}
+	
+	/**
+	 * puts board into Anderssen's mate for the purpose of testing checkmate function
+	 */
+	public void initAnderssen()
+	{
+		blank();
+		
+		board[6][7] = new Square(new Position(8,7),new King(Side.BLACK));
+		this.setBlackKingSquare(board[6][7]);
+		
+		board[5][5] = new Square(new Position(6,6),new King(Side.WHITE));
+		this.setWhiteKingSquare(board[5][5]);
+		
+		board[6][6] = new Square(new Position(7,7),new Pawn(Side.WHITE));
+		board[7][7] = new Square(new Position(8,8),new Rook(Side.WHITE));
+	}
+	
+	/**
+	 * puts board into back rank mate for the purpose of testing checkmate function
+	 */
+	public void initBackRankMate()
+	{
+		blank();
+		
+		board[0][0] = new Square(new Position(1,1),new Rook(Side.BLACK));
+		board[0][7] = new Square(new Position(8,1),new King(Side.WHITE));
+		this.setWhiteKingSquare(board[0][7]);
+		
+		board[1][7] = new Square(new Position(8,2),new Pawn(Side.WHITE));
+		board[1][6] = new Square(new Position(7,2),new Pawn(Side.WHITE));
+	}
+	
+	/**
+	 * puts board into Damiano's bishop mate for the purpose of testing checkmate function
+	 */
+	public void initDamianoBishop()
+	{
+		blank();
+		board[7][5] = new Square(new Position(6, 8), new King(Side.WHITE));
+		this.setWhiteKingSquare(board[7][5]);
+		
+		board[6][5] = new Square(new Position(6,7),new Queen(Side.BLACK));
+		board[5][6] = new Square(new Position(7,6),new Bishop(Side.BLACK));
+
+	}
+	
+	/**
+	 * puts board into box mate for the purpose of testing checkmate function
+	 */
+	public void initBox()
+	{
+		blank();
+		
+		board[7][3] = new Square(new Position(4, 8), new King(Side.WHITE));
+		this.setWhiteKingSquare(board[7][3]);
+		
+		board[7][0] = new Square(new Position(1, 8), new Rook(Side.BLACK));
+		board[5][3] = new Square(new Position(4, 6), new King(Side.BLACK));
+
 	}
 }

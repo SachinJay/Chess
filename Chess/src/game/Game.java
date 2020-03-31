@@ -150,16 +150,27 @@ public class Game
 				{
 					Piece takenPiece = curPiece.move(board, start, end);
 					
+					System.out.println("piece went from "+ start.getPos() + " to " + end.getPos());
+					System.out.println("Configuration after projected move: ");
+					board.print();
+					System.out.println("Above board is in check?: " + !this.isInCheck(side));
+					
 					//If this move caused us to no longer be in check
 					//Then we weren't in checkmate
 					if(!this.isInCheck(side))
 					{
+						//TODO undo move
+						curPiece.overrideMove(board, end, start);
+						end.setPiece(takenPiece);
 						return false;
 					}
 					
 					//TODO undo move
 					curPiece.overrideMove(board, end, start);
 					end.setPiece(takenPiece);
+					
+					System.out.println("Configuration after the projected move is undone: ");
+					board.print();
 				}
 			}
 			return true;
