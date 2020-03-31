@@ -67,6 +67,8 @@ class GameTests
 		
 		board.initArabian();
 		
+		assertTrue(game1.isInCheckMate(Side.BLACK));
+		
 		board.print();
 		
 	}
