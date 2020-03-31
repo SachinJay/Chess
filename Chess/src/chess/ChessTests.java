@@ -326,6 +326,13 @@ class ChessTests
 		assertTrue(king.canMove(board, square, board.getSquare("e2")));
 		assertTrue(king.canMove(board, square, board.getSquare("f2")));
 		
+		board.blank();
+		King whiteKing = new King(Side.WHITE);
+		Square whiteKingSquare = new Square(new Position(8,1),whiteKing);
+		board.setSquare("h1", whiteKingSquare);
+		System.out.println("Ovah here");
+		board.print();
+		assertFalse(whiteKing.legalMoves(board, whiteKingSquare).contains(board.getBoard()[6][0]));
 	}
 	
 	@Test
