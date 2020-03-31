@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import board.Board;
 import board.Square;
+import board.Tuple;
 import pieces.Piece;
 import pieces.Side;
 
@@ -135,46 +136,55 @@ public class Game
 	 */
 	public boolean isInCheckMate(Side side)
 	{
-		// TODO Auto-generated method stub
-		
-		//Check, is opposite side in check? If not, return false
-		//If it is in check, check if there is any move that side can make that results in 
-		
 		if(this.isInCheck(side))
 		{
-			//check if opSide can make a move that results in no more check i.e. !isInCheck(opSide)
-			for(Square[] arr : board.getBoard())
+			//Find side's king
+			Square kingSquare  = this.board.getKingPos(side);	
+			ArrayList<Tuple<Piece,ArrayList<Square>>> pieceMoves = this.board.nextMoves(side);
+			
+			
+			for(Square[] arr : this.board.getBoard()) 
 			{
 				for(Square square : arr)
 				{
-					if(!square.isEmpty() && square.getPiece().getSide().equals(side))
+					if(!square.isEmpty())
 					{
-						Piece curPiece = square.getPiece();
-						ArrayList<Square> legalMoves = curPiece.legalMoves(board, square);
-						for (Square end : legalMoves)
+						for(Tuple<Piece,ArrayList<Square>> pair : pieceMoves)
 						{
-							Piece takenPieceOrNull = curPiece.move(board, square, end);
-
-							if(!this.isInCheck(side))
+							if(pair.getFirst().equals(square.getPiece()))
 							{
-								System.out.println(curPiece.toString()+" could move to "+end.getPos().toString());
-								return false;
+								for(Square move : pair.getSecond())
+								{
+									Piece takenPiece = pair.getFirst().overrideMove(board, square, move);
+									if(!isInCheck(side))
+									{
+										//TODO undo the move
+										pair.getFirst().overrideMove(board, move, square);
+										move.setPiece(takenPiece);
+										return false;
+									}
+									else
+									{
+										//TODO undo the move
+										pair.getFirst().overrideMove(board, move, square);
+										move.setPiece(takenPiece);
+									}
+								}								
 							}
-							
-							curPiece.overrideMove(board, end, square);
-							// put piece back
-							end.setPiece(takenPieceOrNull);
-						}
+						}						
 					}
 				}
 			}
-			return true;
+			
+			return false;
+			
+			
 		}
-		else 
+		//If this side is not in check, it cannot be in checkmate
+		else
 		{
-			return false; 
+			return false;
 		}
-		
 	}
 
 	/**
@@ -190,22 +200,17 @@ public class Game
 		Square kingSquare  = this.board.getKingPos(side);
 		
 		//check if any of sideWhoseLegalMovesMatter's pieces can legally get the king
-		//i.e. if any of those pieces can legally move to king's position
+		//i.e. if any of those pieces can legally move to king's position		
+		ArrayList<Tuple<Piece,ArrayList<Square>>> pieceMoves = this.board.nextMoves(sideWhoseLegalMovesMatter);
 		
-		for (Square[] arr : board.getBoard())
+		for(Tuple<Piece,ArrayList<Square>> pair : pieceMoves)
 		{
-			for (Square start : arr)
+			if(pair.getSecond().contains(kingSquare))
 			{
-				if(!start.isEmpty() && start.getPiece().getSide().equals(sideWhoseLegalMovesMatter))
-				{
-					Piece curPiece = start.getPiece();
-					if (curPiece.legalMoves(board, start).contains(kingSquare))
-					{
-						return true;
-					}
-				}
+				return true;
 			}
 		}
+		
 
 		return false;
 	}
