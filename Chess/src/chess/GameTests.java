@@ -8,12 +8,6 @@ import board.Board;
 import game.Game;
 import game.Player;
 import game.Status;
-import pieces.Bishop;
-import pieces.King;
-import pieces.Knight;
-import pieces.Pawn;
-import pieces.Queen;
-import pieces.Rook;
 import pieces.Side;
 
 class GameTests
