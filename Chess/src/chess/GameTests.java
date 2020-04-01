@@ -59,6 +59,7 @@ class GameTests
 		assertEquals(Status.IN_PLAY.makeString(), game1.getStatus().makeString());
 		assertEquals(Status.IN_PLAY.makeString(), game2.getStatus().makeString());
 		
+		//*******************CHECKMATE TESTS*****************//
 		board.initArabian();
 		
 		assertTrue(game1.isInCheckMate(Side.BLACK));
@@ -74,6 +75,16 @@ class GameTests
 		
 		board.initBox();
 		assertTrue(game1.isInCheckMate(Side.WHITE));
+		//****************************************************//
+		
+		//****************STALEMATE TESTS*********************//
+		board.initKingPawnKing();
+		
+		assertEquals(Side.WHITE, game1.getTurn().getSide());
+		assertTrue(game1.isInStaleMate());
+		
+		
+		//****************************************************//
 		
 	}
 

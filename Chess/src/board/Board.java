@@ -322,4 +322,20 @@ public class Board
 		board[5][3] = new Square(new Position(4, 6), new King(Side.BLACK));
 
 	}
+	
+	/**
+	 * puts board into a stalemate position for white
+	 */
+	public void initKingPawnKing()
+	{
+		blank();
+		
+		board[0][4] = new Square(new Position(5, 1), new King(Side.BLACK));
+		this.setBlackKingSquare(board[0][4]);
+		
+		board[1][4] = new Square(new Position(5, 2), new Pawn(Side.BLACK));
+		
+		board[2][4] = new Square(new Position(5, 3), new King(Side.WHITE));
+		this.setWhiteKingSquare(board[0][4]);
+	}
 }

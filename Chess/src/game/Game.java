@@ -128,6 +128,61 @@ public class Game
 			this.status = Status.IN_PLAY;
 		}
 	}
+	
+	/**
+	 * Checks to see if the game is in stalemate
+	 * @return true if the game is in stalemate, false otherwise
+	 */
+	public boolean isInStaleMate()
+	{
+		Side side = this.getTurn().getSide();
+		
+		//If the current side is in check, the game cannot possibly be in stalemate
+		if(isInCheck(side))
+		{
+			return false; 			
+		}
+		
+		//if no matter what that side does results in check, then the game is in stalemate
+		ArrayList<Tuple<Piece,Square>> piecesAndStarts = this.board.piecesWithStarts(side);
+		
+		for(Tuple<Piece,Square> pieceAndStart : piecesAndStarts)
+		{
+			Piece curPiece = pieceAndStart.getFirst();
+			Square start = pieceAndStart.getSecond();
+			ArrayList<Square> moves = curPiece.legalMoves(board, start);
+			
+			for(Square end : moves)
+			{
+				Piece takenPiece = curPiece.move(board, start, end);
+				
+				System.out.println("piece went from "+ start.getPos() + " to " + end.getPos());
+				System.out.println("Configuration after projected move: ");
+				board.print();
+				System.out.println("Above board is in check?: " + !this.isInCheck(side));
+				
+				//If this move caused us to not be in check then we're not in stalemate
+				if(!this.isInCheck(side))
+				{
+					//TODO undo move
+					curPiece.overrideMove(board, end, start);
+					end.setPiece(takenPiece);
+					return false;
+				}
+				
+				//TODO undo move
+				curPiece.overrideMove(board, end, start);
+				end.setPiece(takenPiece);
+				
+				System.out.println("Configuration after the projected move is undone: ");
+				board.print();
+			}
+		}
+		
+		//If we go through all those moves and it never returns false, then we are in stalemate
+		return true;
+		
+	}
 
 	/**
 	 * Checks if a certain side is in checkmate
