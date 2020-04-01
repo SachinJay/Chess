@@ -28,7 +28,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 
 import board.Board;
 import board.Position;
@@ -141,6 +140,10 @@ public class Grid
 	
 	private class BoardPanel extends JPanel
 	{
+		/**
+		 * Default
+		 */
+		private static final long serialVersionUID = 1L;
 		List<SquarePanel> boardSquares;
 		
 		BoardPanel() throws IOException
@@ -180,6 +183,10 @@ public class Grid
 	
 	private class SquarePanel extends JPanel
 	{
+		/**
+		 * Default
+		 */
+		private static final long serialVersionUID = 1L;
 		private String pos;
 		
 		private void reset()
