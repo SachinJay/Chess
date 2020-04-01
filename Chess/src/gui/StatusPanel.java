@@ -1,8 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +11,10 @@ import game.Player;
 
 public class StatusPanel extends JPanel
 {
+	/**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel gameStatusPanel;
 	private JPanel turnPanel;	
 	
