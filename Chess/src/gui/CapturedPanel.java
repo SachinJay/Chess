@@ -20,6 +20,10 @@ import pieces.Piece;
 
 public class CapturedPanel extends JPanel
 {
+	/**
+	 * Default
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel whitePanel;
 	private JPanel blackPanel;
 	
