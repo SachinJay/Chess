@@ -79,9 +79,20 @@ class GameTests
 		
 		//****************STALEMATE TESTS*********************//
 		board.initKingPawnKing();
+		assertEquals(Side.WHITE, game2.getTurn().getSide());
+		assertTrue(game2.isInStaleMate());
 		
-		assertEquals(Side.WHITE, game1.getTurn().getSide());
-		assertTrue(game1.isInStaleMate());
+		
+		board.initKingPawnKingVariation();
+		assertEquals(Side.WHITE,game2.getTurn().getSide());
+		assertEquals(p1,game2.getTurn());
+		game2.changeTurn();
+		assertEquals(p2, game2.getTurn());
+		assertEquals(Side.BLACK,game2.getTurn().getSide());
+		assertTrue(game2.isInStaleMate());
+		
+		board.initKingKingQueen();
+		assertTrue(game2.isInStaleMate());
 		
 		
 		//****************************************************//

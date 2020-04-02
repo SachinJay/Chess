@@ -330,12 +330,45 @@ public class Board
 	{
 		blank();
 		
-		board[0][4] = new Square(new Position(5, 1), new King(Side.BLACK));
-		this.setBlackKingSquare(board[0][4]);
+		board[2][4] = new Square(new Position(5, 3), new King(Side.BLACK));
+		this.setBlackKingSquare(board[2][4]);
 		
 		board[1][4] = new Square(new Position(5, 2), new Pawn(Side.BLACK));
 		
-		board[2][4] = new Square(new Position(5, 3), new King(Side.WHITE));
+		board[0][4] = new Square(new Position(5, 1), new King(Side.WHITE));
 		this.setWhiteKingSquare(board[0][4]);
 	}
+	
+	/**
+	 * puts board into a stalemate position for black
+	 */
+	public void initKingPawnKingVariation()
+	{
+		blank();
+		
+		board[7][0] = new Square(new Position(1, 8), new King(Side.BLACK));
+		this.setBlackKingSquare(board[7][0]);
+		
+		board[6][0] = new Square(new Position(1, 7), new Pawn(Side.WHITE));
+		
+		board[5][1] = new Square(new Position(2, 6), new King(Side.WHITE));
+		this.setWhiteKingSquare(board[5][1]);
+	}	
+	
+	/**
+	 * puts board into a stalemate position for black
+	 */
+	public void initKingKingQueen()
+	{
+		blank();
+		
+		board[7][7] = new Square(new Position(8, 8), new King(Side.BLACK));
+		this.setBlackKingSquare(board[7][7]);
+		
+		board[5][6] = new Square(new Position(7, 6), new Queen(Side.WHITE));
+		
+		board[6][5] = new Square(new Position(6, 7), new King(Side.WHITE));
+		this.setWhiteKingSquare(board[6][5]);
+	}
+	
 }
